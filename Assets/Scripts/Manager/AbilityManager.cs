@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class AbilityManager : Singleton<AbilityManager>
 {
-    private readonly List<AbilityBase> _abilities = new List<AbilityBase>();
+    [SerializeField] private List<AbilityBase> _abilities = new List<AbilityBase>();
     private readonly Dictionary<string,AbilityBase> _abilitiesMap = new Dictionary<string, AbilityBase>();
 
     private void Start()
