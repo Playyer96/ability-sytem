@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +5,10 @@ public class CooldownManager : Singleton<CooldownManager>
 {
     private readonly List<CooldownData> _cooldowns = new List<CooldownData>();
 
-    private void Update() => ProcessCooldowns();
+    private void Update()
+    {
+        ProcessCooldowns();
+    }
 
     public void PutOnCooldown(ICooldownable cooldown)
     {
@@ -18,7 +19,10 @@ public class CooldownManager : Singleton<CooldownManager>
     {
         foreach (var cooldown in _cooldowns)
         {
-            if(cooldown.Id == id) { return true; }
+            if (cooldown.Id == id)
+            {
+                return true;
+            }
         }
 
         return false;
@@ -26,11 +30,14 @@ public class CooldownManager : Singleton<CooldownManager>
 
     public float GetRemainingDuration(int id)
     {
-        foreach (var cooldowm in _cooldowns)
+        foreach (var cooldown in _cooldowns)
         {
-            if(cooldowm.Id != id) { continue; }
+            if (cooldown.Id != id)
+            {
+                continue;
+            }
 
-            return cooldowm.RemainingTime;
+            return cooldown.RemainingTime;
         }
 
         return 0f;
