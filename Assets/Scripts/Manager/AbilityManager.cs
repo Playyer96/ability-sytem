@@ -33,30 +33,30 @@ public class AbilityManager : Singleton<AbilityManager>
     
     public void ToggleAbilities(bool toggle)
     {
-        foreach (var ability in _abilitiesMap)
+        foreach (var (key, value) in _abilitiesMap)
         {
-            ability.Value.enabled = toggle;
+            value.enabled = toggle;
         }
     }
 
     public void ToggleAbility(string abilityName,bool toggle)
     {
-        foreach (var ability in _abilitiesMap)
+        foreach (var (key, value) in _abilitiesMap)
         {
-            if (ability.Key == abilityName)
+            if (key == abilityName)
             {
-                ability.Value.enabled = toggle;
+                value.enabled = toggle;
             }
         }
     }
 
     public AbilityBase GetAbility(string abilityName)
     {
-        foreach (var ability in _abilitiesMap)
+        foreach (var (key, value) in _abilitiesMap)
         {
-            if (ability.Key == abilityName)
+            if (key == abilityName)
             {
-                return ability.Value;
+                return value;
             }
         }
 
