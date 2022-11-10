@@ -16,4 +16,9 @@ public abstract class AbilityBase : MonoBehaviour
 
     public abstract void UseAbility();
 
+    /// <summary>
+    /// Here you need to write your ability code
+    /// </summary>
+    public abstract void Ability();
+
 }
