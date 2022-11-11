@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface ICancelable
 {
-    public void CancelAbility();
+    void CancelAbility();
 }

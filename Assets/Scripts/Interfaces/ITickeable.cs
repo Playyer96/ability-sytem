@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface ITickeable
 {
-    public void Tick(float deltaTime);
+    void Tick(float deltaTime);
 }
