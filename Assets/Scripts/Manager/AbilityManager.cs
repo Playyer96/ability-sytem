@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,19 +5,6 @@ public class AbilityManager : Singleton<AbilityManager>
 {
     [SerializeField] private List<AbilityBase> _abilities = new List<AbilityBase>();
     private readonly Dictionary<string,AbilityBase> _abilitiesMap = new Dictionary<string, AbilityBase>();
-
-    private void Start()
-    {
-        Setup();
-    }
-
-    private void Setup()
-    {
-        foreach (var ability in _abilities)
-        {
-            AddAbility(ability);
-        }
-    }
 
     public void AddAbility(AbilityBase ability)
     {
@@ -61,6 +46,19 @@ public class AbilityManager : Singleton<AbilityManager>
         }
 
         return null;
+    }
+    
+    private void Start()
+    {
+        Setup();
+    }
+
+    private void Setup()
+    {
+        foreach (var ability in _abilities)
+        {
+            AddAbility(ability);
+        }
     }
 }
 

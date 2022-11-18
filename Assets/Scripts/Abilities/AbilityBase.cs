@@ -1,18 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class AbilityBase : MonoBehaviour
 {
-    [SerializeField] private string abilityName;
-    [SerializeField] private string description;
-    [SerializeField] private Sprite icon;
-    [SerializeField] private bool isEnable;
+    [SerializeField] private string _abilityName;
+    [SerializeField] private string _description;
+    [SerializeField] private Sprite _icon;
+    [SerializeField] private bool _isEnable;
 
-    public string AbilityName { get => abilityName; set => abilityName = value; }
-    public string Description { get => description; set => description = value; }
-    public Sprite Icon { get => icon; set => icon = value; }
-    public bool IsEnable { get => isEnable; set => isEnable = value; }
+    public string AbilityName { get => _abilityName; set => _abilityName = value; }
+    public string Description { get => _description; set => _description = value; }
+    public Sprite Icon { get => _icon; set => _icon = value; }
+    public bool IsEnable { get => _isEnable; set => _isEnable = value; }
 
     public abstract void UseAbility();
 
@@ -20,5 +18,4 @@ public abstract class AbilityBase : MonoBehaviour
     /// Here you need to write your ability code
     /// </summary>
     public abstract void Ability();
-
 }
