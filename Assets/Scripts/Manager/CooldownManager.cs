@@ -3,18 +3,32 @@ using UnityEngine;
 
 public class CooldownManager : Singleton<CooldownManager>
 {
-    private readonly List<CooldownData> _cooldowns = new List<CooldownData>();
-
-    private void Update()
+    public class CooldownData
     {
-        ProcessCooldowns();
-    }
+        public int Id { get; }
+        public float RemainingTime { get; private set; }
 
+        public CooldownData(ICooldownable cooldown)
+        {
+            Id = cooldown.Id;
+            RemainingTime = cooldown.CooldownDuration;
+        }
+
+        public bool DecrementCooldown(float deltaTime)
+        {
+            RemainingTime = Mathf.Max(RemainingTime - deltaTime, 0);
+
+            return RemainingTime == 0;
+        }
+    }
+    
+    private readonly List<CooldownData> _cooldowns = new List<CooldownData>();
+    
     public void PutOnCooldown(ICooldownable cooldown)
     {
         _cooldowns.Add(new CooldownData(cooldown));
     }
-
+    
     public bool IsOnCooldown(int id)
     {
         foreach (var cooldown in _cooldowns)
@@ -27,7 +41,7 @@ public class CooldownManager : Singleton<CooldownManager>
 
         return false;
     }
-
+    
     public float GetRemainingDuration(int id)
     {
         foreach (var cooldown in _cooldowns)
@@ -42,6 +56,11 @@ public class CooldownManager : Singleton<CooldownManager>
 
         return 0f;
     }
+    
+    private void Update()
+    {
+        ProcessCooldowns();
+    }
 
     private void ProcessCooldowns()
     {
@@ -54,24 +73,5 @@ public class CooldownManager : Singleton<CooldownManager>
                 _cooldowns.RemoveAt(i);
             }
         }
-    }
-}
-
-public class CooldownData
-{
-    public int Id { get; }
-    public float RemainingTime { get; private set; }
-
-    public CooldownData(ICooldownable cooldown)
-    {
-        Id = cooldown.Id;
-        RemainingTime = cooldown.CooldownDuration;
-    }
-
-    public bool DecrementCooldown(float deltaTime)
-    {
-        RemainingTime = Mathf.Max(RemainingTime - deltaTime, 0);
-
-        return RemainingTime == 0;
     }
 }
