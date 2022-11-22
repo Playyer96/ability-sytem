@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,17 +8,18 @@ public class AbilityController : MonoBehaviour
 {
     [SerializeField] private List<AbilityBase> _abilities = new List<AbilityBase>();
     [SerializeField] private PlayerInput playerInput;
-    private readonly Dictionary<InputActionReference, AbilityBase> _abilitiesMap = new Dictionary<InputActionReference, AbilityBase>();
+    private readonly Dictionary<Guid, AbilityBase> _abilitiesMap = 
+        new Dictionary<Guid, AbilityBase>();
 
 
     public void AddAbility(AbilityBase ability)
     {
-        _abilitiesMap.Add(ability.InputAction, ability);
+        _abilitiesMap.Add(ability.InputAction.action.id, ability);
     }
 
     public void RemoveAbility(AbilityBase ability)
     {
-        _abilitiesMap.Remove(ability.InputAction);
+        _abilitiesMap.Remove(ability.InputAction.action.id);
     }
     
     public void ToggleAbilities(bool toggle)
@@ -38,11 +41,11 @@ public class AbilityController : MonoBehaviour
         }
     }
 
-    public AbilityBase GetAbility(InputActionReference abilityName)
+    public AbilityBase GetAbility(Guid abilityId)
     {
-        foreach (var value in _abilitiesMap.Values)
+        foreach (var (key,value) in _abilitiesMap)
         {
-            if (value.InputAction == abilityName)
+            if (key == abilityId)
             {
                 return value;
             }
@@ -51,20 +54,18 @@ public class AbilityController : MonoBehaviour
         return null;
     }
 
-    public void UseAbility(InputActionReference abilityKey, InputAction.CallbackContext context)
+    public void UseAbility(InputAction.CallbackContext context)
     {
         if (context.started) 
         {
-
-            AbilityBase ability = GetAbility(abilityKey);
-
+            AbilityBase ability = GetAbility(context.action.id);
+            
             if (ability) {
                 ability.UseAbility();
             }
         }
 
     }
-
     
     private void Start()
     {
