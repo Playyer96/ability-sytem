@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4730419369655396685}
   - component: {fileID: 8906482052639634322}
   - component: {fileID: 6397542794849905115}
+  - component: {fileID: 2079431412}
   m_Layer: 0
   m_Name: Garen
   m_TagString: Untagged
@@ -47,11 +48,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _abilities:
-  - {fileID: 0}
-  - {fileID: 6397542794849905115}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - _ability: {fileID: 6397542794849905115}
+    _abilityInput: {fileID: 2859302965947505697, guid: df0a3d101bdcb6d459f1f7748c384f68, type: 3}
+  - _ability: {fileID: 2079431412}
+    _abilityInput: {fileID: 8034861231224735860, guid: df0a3d101bdcb6d459f1f7748c384f68, type: 3}
   playerInput: {fileID: 8906482052639634322}
 --- !u!114 &8906482052639634322
 MonoBehaviour:
@@ -79,19 +79,7 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4730419369655396685}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
     m_ActionId: 638116bc-8366-42de-b884-21dd669ab92a
     m_ActionName: AbilitySystem/FirstAbility[/Keyboard/q]
   - m_PersistentCalls:
@@ -127,4 +115,19 @@ MonoBehaviour:
   _description: Q de garen que gira
   _icon: {fileID: 21300000, guid: 56e456ab0f7f79a4dbabcc9079c49a94, type: 3}
   _isEnable: 1
-  _inputAction: {fileID: -1443774147439166373, guid: df0a3d101bdcb6d459f1f7748c384f68, type: 3}
+--- !u!114 &2079431412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 746084242821603100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e788505459701845a34ff5f85a7d527, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _abilityName: W de Gren
+  _description: W de garen que da escudo
+  _icon: {fileID: 21300000, guid: e92527f6d0fe45342ab542b47346d45f, type: 3}
+  _isEnable: 1
