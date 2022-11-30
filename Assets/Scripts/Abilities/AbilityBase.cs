@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public abstract class AbilityBase : MonoBehaviour
 {
@@ -6,6 +7,7 @@ public abstract class AbilityBase : MonoBehaviour
     [SerializeField] private string _description;
     [SerializeField] private Sprite _icon;
     [SerializeField] private bool _isEnable;
+
 
     public string AbilityName { get => _abilityName; set => _abilityName = value; }
     public string Description { get => _description; set => _description = value; }
