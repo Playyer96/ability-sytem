@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+[ExecuteInEditMode()]
 public class Tooltip : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _headerField;
@@ -19,6 +20,7 @@ public class Tooltip : MonoBehaviour
     private void Awake()
     {
         _rectTransform = GetComponent<RectTransform>();
+        _layoutElement = GetComponent<LayoutElement>();
     }
 
     private void Update()

@@ -5,23 +5,25 @@ using UnityEngine;
 
 public class TooltipSystem : MonoBehaviour
 {
-    public static TooltipSystem _tooltipSystem;
+    public static TooltipSystem tooltipSystem;
 
     [SerializeField] private Tooltip tooltip;
     
     private void Awake()
     {
-        _tooltipSystem = this;
+        tooltipSystem = this;
     }
 
     public static void Show(bool value, string content, string header = "")
     {
-        _tooltipSystem.tooltip.SetText(content, header);
-        _tooltipSystem.tooltip.gameObject.SetActive(value);
+        if(string.IsNullOrEmpty(header) || string.IsNullOrEmpty(content)) return;
+        
+        tooltipSystem.tooltip.SetText(content, header);
+        tooltipSystem.tooltip.gameObject.SetActive(value);
     }
 
     public static void Show(bool value)
     {
-        _tooltipSystem.tooltip.gameObject.SetActive(false);
+        tooltipSystem.tooltip.gameObject.SetActive(false);
     }
 }
