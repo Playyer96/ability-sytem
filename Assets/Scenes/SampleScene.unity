@@ -335,6 +335,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2079431412, guid: 8332dc5fc8d1d0a4ea934aec6d13f8f3, type: 3}
+      propertyPath: _abilityInput
+      value: 
+      objectReference: {fileID: 8034861231224735860, guid: df0a3d101bdcb6d459f1f7748c384f68, type: 3}
     - target: {fileID: 746084242821603100, guid: 8332dc5fc8d1d0a4ea934aec6d13f8f3, type: 3}
       propertyPath: m_Name
       value: Garen
@@ -351,6 +355,18 @@ PrefabInstance:
       propertyPath: _abilities.Array.data[1]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 4730419369655396685, guid: 8332dc5fc8d1d0a4ea934aec6d13f8f3, type: 3}
+      propertyPath: _activeAbilities.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4730419369655396685, guid: 8332dc5fc8d1d0a4ea934aec6d13f8f3, type: 3}
+      propertyPath: _activeAbilities.Array.data[0]
+      value: 
+      objectReference: {fileID: 2079431407}
+    - target: {fileID: 4730419369655396685, guid: 8332dc5fc8d1d0a4ea934aec6d13f8f3, type: 3}
+      propertyPath: _activeAbilities.Array.data[1]
+      value: 
+      objectReference: {fileID: 4487644167847347352}
     - target: {fileID: 6338620627688925396, guid: 8332dc5fc8d1d0a4ea934aec6d13f8f3, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -395,6 +411,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6397542794849905115, guid: 8332dc5fc8d1d0a4ea934aec6d13f8f3, type: 3}
+      propertyPath: _abilityInput
+      value: 
+      objectReference: {fileID: -1443774147439166373, guid: df0a3d101bdcb6d459f1f7748c384f68, type: 3}
     - target: {fileID: 6397542794849905115, guid: 8332dc5fc8d1d0a4ea934aec6d13f8f3, type: 3}
       propertyPath: _inputAction.m_Id
       value: a5ad88c5-0a6b-465a-8695-76e16400d89d
@@ -453,3 +473,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8332dc5fc8d1d0a4ea934aec6d13f8f3, type: 3}
+--- !u!114 &4487644167847347352 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2079431412, guid: 8332dc5fc8d1d0a4ea934aec6d13f8f3, type: 3}
+  m_PrefabInstance: {fileID: 4487644167847347351}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2079431406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e788505459701845a34ff5f85a7d527, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
