@@ -79,7 +79,7 @@ public class AbilityController : MonoBehaviour
                 }
                 else
                 {
-                    // Here we need to trigger the pasive, BUT how do we do that without any context?
+                    // Here we need to trigger the passive, BUT how do we do that without any context?
                 }
             }
         }
