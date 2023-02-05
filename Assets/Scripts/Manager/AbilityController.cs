@@ -44,18 +44,15 @@ public class AbilityController : MonoBehaviour
         return null;
     }
 
-    public void UseAbility(InputAction.CallbackContext context)
+    public void UseAbility(InputAction.CallbackContext context, AbilityBase ability)
     {
         if (context.started) 
         {
-            AbilityBase ability = GetAbility(context.action.id);
-            
             if (ability) 
             {
                 ability.UseAbility();
             }
         }
-
     }
     
     private void Start()
@@ -73,8 +70,16 @@ public class AbilityController : MonoBehaviour
                 {
                     if (activable.AbilityInput.action.id.ToString() == actionEvent.actionId)
                     {
-                        actionEvent.AddListener(UseAbility);
+                        actionEvent.AddListener(
+                            delegate(InputAction.CallbackContext context)
+                            {
+                                UseAbility(context,ability);
+                            });
                     }
+                }
+                else
+                {
+                    // Here we need to trigger the pasive, BUT how do we do that without any context?
                 }
             }
         }

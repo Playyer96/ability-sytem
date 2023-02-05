@@ -49,8 +49,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _abilities:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8543674444555878424}
+  - {fileID: 6397542794849905115}
+  - {fileID: 2079431412}
   playerInput: {fileID: 8906482052639634322}
 --- !u!114 &8906482052639634322
 MonoBehaviour:
@@ -107,7 +108,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 746084242821603100}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 348395ad98442374c857e5327b1f63e7, type: 3}
+  m_Script: {fileID: 11500000, guid: 4ec5761f466eae249b71d069d11bcab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _abilityName: 
@@ -130,7 +131,7 @@ MonoBehaviour:
   _description: Q de garen que gira
   _icon: {fileID: 21300000, guid: 56e456ab0f7f79a4dbabcc9079c49a94, type: 3}
   _isEnable: 1
-  _abilityInput: {fileID: 0}
+  _abilityInput: {fileID: -1443774147439166373, guid: df0a3d101bdcb6d459f1f7748c384f68, type: 3}
 --- !u!114 &2079431412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,4 +148,4 @@ MonoBehaviour:
   _description: W de garen que da escudo
   _icon: {fileID: 21300000, guid: e92527f6d0fe45342ab542b47346d45f, type: 3}
   _isEnable: 1
-  _abilityInput: {fileID: 0}
+  _abilityInput: {fileID: 8034861231224735860, guid: df0a3d101bdcb6d459f1f7748c384f68, type: 3}
