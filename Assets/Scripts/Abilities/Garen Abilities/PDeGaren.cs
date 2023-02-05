@@ -1,16 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public abstract class activeAbilityBase : AbilityBase
+public class PDeGaren : AbilityBase
 {
-    public InputActionReference _abilityInput;
     public override void UseAbility()
     {
+        Debug.LogError("Trigger P de garen");
     }
 
     public override void Ability()
     {
+        
     }
 }

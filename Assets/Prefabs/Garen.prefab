@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6338620627688925396}
   - component: {fileID: 4730419369655396685}
   - component: {fileID: 8906482052639634322}
+  - component: {fileID: 8543674444555878424}
   - component: {fileID: 6397542794849905115}
   - component: {fileID: 2079431412}
   m_Layer: 0
@@ -48,10 +49,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _abilities:
-  - _ability: {fileID: 6397542794849905115}
-    _abilityInput: {fileID: 2859302965947505697, guid: df0a3d101bdcb6d459f1f7748c384f68, type: 3}
-  - _ability: {fileID: 2079431412}
-    _abilityInput: {fileID: 8034861231224735860, guid: df0a3d101bdcb6d459f1f7748c384f68, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
   playerInput: {fileID: 8906482052639634322}
 --- !u!114 &8906482052639634322
 MonoBehaviour:
@@ -99,6 +98,22 @@ MonoBehaviour:
   m_DefaultActionMap: AbilitySystem
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &8543674444555878424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 746084242821603100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 348395ad98442374c857e5327b1f63e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _abilityName: 
+  _description: 
+  _icon: {fileID: 0}
+  _isEnable: 0
 --- !u!114 &6397542794849905115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,6 +130,7 @@ MonoBehaviour:
   _description: Q de garen que gira
   _icon: {fileID: 21300000, guid: 56e456ab0f7f79a4dbabcc9079c49a94, type: 3}
   _isEnable: 1
+  _abilityInput: {fileID: 0}
 --- !u!114 &2079431412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,3 +147,4 @@ MonoBehaviour:
   _description: W de garen que da escudo
   _icon: {fileID: 21300000, guid: e92527f6d0fe45342ab542b47346d45f, type: 3}
   _isEnable: 1
+  _abilityInput: {fileID: 0}

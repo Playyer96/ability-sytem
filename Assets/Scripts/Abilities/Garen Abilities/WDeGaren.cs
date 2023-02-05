@@ -1,20 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class WDeGaren : activeAbilityBase
+public class WDeGaren : AbilityBase, IActivable
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private InputActionReference _abilityInput;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public InputActionReference AbilityInput => _abilityInput;
 
     public override void UseAbility()
     {
