@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -26,22 +27,6 @@ public class AbilityController : MonoBehaviour
                 ability.enabled = toggle;
             }
         }
-    }
-
-    public AbilityBase GetAbility(Guid abilityId)
-    {
-        foreach (var ability in _abilities)
-        {
-            if (ability is IActivable activable)
-            {
-                if (activable.AbilityInput.action.id == abilityId)
-                {
-                    return ability;
-                }
-            }
-        }
-
-        return null;
     }
 
     public void UseAbility(InputAction.CallbackContext context, AbilityBase ability)
@@ -85,39 +70,40 @@ public class AbilityController : MonoBehaviour
         }
     }
 
-    // private void OnValidate()
-    // {  
-    //     for (int i = 0; i < _abilities.Count; i++)
-    //     {
-    //         for (int j = 0; j < _abilities.Count; j++)
-    //         {
-    //             if(i==j)
-    //             {
-    //                 continue;
-    //             }
-    //
-    //             if (!_abilities[j])
-    //             {
-    //                 Debug.LogError("You have some ability unassigned at index: " + j);
-    //                 return;
-    //             }
-    //             
-    //             if (_abilities[j] is IActivable activable && !activable.AbilityInput)
-    //             {
-    //                 Debug.LogError("You have some ability with null InputAction at index: " + j);
-    //                 return;
-    //             }
-    //
-    //             if (_abilities[i] is IActivable activableI && _abilities[j] is IActivable activableJ)
-    //             {
-    //                 if (activableI.AbilityInput.action.id == activableJ.AbilityInput.action.id)
-    //                 {
-    //                     Debug.LogError("You can't assign same input to different abilities. Check InputAction in each ability");
-    //                     return;
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
+    private void OnValidate()
+    {
+        EditorUtility.SetDirty(this);
+        for (int i = 0; i < _abilities.Count; i++)
+        {
+            for (int j = 0; j < _abilities.Count; j++)
+            {
+                if(i==j)
+                {
+                    continue;
+                }
+    
+                if (!_abilities[j])
+                {
+                    Debug.LogError("You have some ability unassigned at index: " + j);
+                    return;
+                }
+                
+                if (_abilities[j] is IActivable activable && !activable.AbilityInput)
+                {
+                    Debug.LogError("You have some ability with null InputAction at index: " + j);
+                    return;
+                }
+    
+                if (_abilities[i] is IActivable activableI && _abilities[j] is IActivable activableJ)
+                {
+                    if (activableI.AbilityInput.action.id == activableJ.AbilityInput.action.id)
+                    {
+                        Debug.LogError("You can't assign same input to different abilities. Check InputAction in each ability");
+                        return;
+                    }
+                }
+            }
+        }
+    }
 }
 
