@@ -7,6 +7,11 @@ public class WDeGaren : AbilityBase, IActivable
 
     public InputActionReference AbilityInput => _abilityInput;
 
+    public override void Setup(StatsScriptableObject stats)
+    {
+        
+    }
+
     public override void UseAbility()
     {
         Debug.LogError("Trigger W de garen");

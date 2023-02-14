@@ -39,13 +39,8 @@ public class AbilityController : MonoBehaviour
             }
         }
     }
-    
-    private void Start()
-    {
-        Setup();
-    }
 
-    private void Setup()
+    public void Setup(StatsScriptableObject stats)
     {
         foreach (var ability in _abilities)
         {
@@ -55,6 +50,7 @@ public class AbilityController : MonoBehaviour
                 {
                     if (activable.AbilityInput.action.id.ToString() == actionEvent.actionId)
                     {
+                        ability.Setup(stats);
                         actionEvent.AddListener(
                             delegate(InputAction.CallbackContext context)
                             {

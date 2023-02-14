@@ -2,9 +2,14 @@ using UnityEngine;
 
 public class PDeGaren : AbilityBase
 {
+    public override void Setup(StatsScriptableObject stats)
+    {
+        
+    }
+
     public override void UseAbility()
     {
-        Debug.LogError("Trigger P de garen");
+        Ability();
     }
 
     public override void Ability()
