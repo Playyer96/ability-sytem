@@ -12,4 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44de585d2bf06c34b929228c4eac6f69, type: 3}
   m_Name: Garen
   m_EditorClassIdentifier: 
-  characterStats: []
+  characterStats:
+  - statId: Attack
+    nameToShow: Attack
+    value: 1
+  - statId: MoveSpeed
+    nameToShow: Move Speed
+    value: 1

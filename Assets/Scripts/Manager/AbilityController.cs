@@ -10,6 +10,8 @@ public class AbilityController : MonoBehaviour
     [SerializeField] private List<AbilityBase> _abilities;
     [SerializeField] private PlayerInput playerInput;
 
+    private List<AbilityBase> _activeAbilities = new();
+
     public void ToggleAbilities(bool toggle)
     {
         foreach (var ability in _abilities)
@@ -35,6 +37,7 @@ public class AbilityController : MonoBehaviour
         {
             if (ability) 
             {
+                _activeAbilities.Add(ability);
                 ability.UseAbility();
             }
         }
@@ -62,6 +65,22 @@ public class AbilityController : MonoBehaviour
                 {
                     // Here we need to trigger the passive, BUT how do we do that without any context?
                 }
+            }
+        }
+    }
+
+    private void Update()
+    {
+        for(int i = _activeAbilities.Count - 1; i >= 0; i--)
+        {
+            if (_activeAbilities[i] is ITickeable tickeable)
+            {
+                if (!tickeable.IsActive)
+                {
+                    _activeAbilities.Remove(_activeAbilities[i]);
+                    continue;
+                }
+                tickeable.Tick(Time.deltaTime);
             }
         }
     }

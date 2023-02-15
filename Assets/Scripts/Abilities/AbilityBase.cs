@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -7,7 +8,8 @@ public abstract class AbilityBase : MonoBehaviour
     [SerializeField] private string _description;
     [SerializeField] private Sprite _icon;
     [SerializeField] private bool _isEnable;
-    [SerializeField] protected StatsScriptableObject stats;
+
+    protected List<Stat> impactedStats = new();
 
     public string AbilityName { get => _abilityName; set => _abilityName = value; }
     public string Description { get => _description; set => _description = value; }
@@ -15,6 +17,7 @@ public abstract class AbilityBase : MonoBehaviour
     public bool IsEnable { get => _isEnable; set => _isEnable = value; }
 
     public abstract void Setup(StatsScriptableObject stats);
+
     public abstract void UseAbility();
 
     /// <summary>
