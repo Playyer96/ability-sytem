@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class UIManager : Singleton<UIManager>
 {
-    [SerializeField] private AbilityManager _abilityManager;
+    // [SerializeField] private AbilityManager _abilityManager;
     
     private void Start()
     {
-        _abilityManager = GetComponent<AbilityManager>();
+        // _abilityManager = GetComponent<AbilityManager>();
     }
 }
