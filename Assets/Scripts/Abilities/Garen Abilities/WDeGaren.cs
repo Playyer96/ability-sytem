@@ -12,13 +12,9 @@ public class WDeGaren : AbilityBase, IActivable
         
     }
 
-    public override void UseAbility()
-    {
-        Debug.LogError("Trigger W de garen");
-    }
-
     public override void Ability()
     {
-        
+        Debug.LogError("Trigger W de garen");
+
     }
 }

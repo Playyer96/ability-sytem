@@ -11,18 +11,31 @@ public abstract class AbilityBase : MonoBehaviour
 
     protected List<Stat> impactedStats = new();
 
-    public string AbilityName { get => _abilityName; set => _abilityName = value; }
-    public string Description { get => _description; set => _description = value; }
-    public Sprite Icon { get => _icon; set => _icon = value; }
-    public bool IsEnable { get => _isEnable; set => _isEnable = value; }
+    public string AbilityName { get => _abilityName; }
+    public string Description { get => _description;  }
+    public Sprite Icon { get => _icon;  }
+    public bool IsEnable { get => _isEnable;  }
+    
+    public bool IsActive { get; protected set; }
 
     public abstract void Setup(StatsScriptableObject stats);
-
-    public abstract void UseAbility();
 
     /// <summary>
     /// Here you need to write your ability code
     /// </summary>
     public abstract void Ability();
 
+    protected virtual bool FindStat(string id, ref Stat outStat)
+    {
+        foreach (var stat in impactedStats)
+        {
+            if (stat.statId == id)
+            {
+                outStat = stat;
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

@@ -112,10 +112,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ec5761f466eae249b71d069d11bcab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _abilityName: 
-  _description: 
+  _abilityName: Pasiva
+  _description: Pasiva
   _icon: {fileID: 0}
   _isEnable: 0
+  _timeToActive: 3
 --- !u!114 &6397542794849905115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,6 +134,7 @@ MonoBehaviour:
   _icon: {fileID: 21300000, guid: 56e456ab0f7f79a4dbabcc9079c49a94, type: 3}
   _isEnable: 1
   _abilityInput: {fileID: -1443774147439166373, guid: df0a3d101bdcb6d459f1f7748c384f68, type: 3}
+  _duration: 10
 --- !u!114 &2079431412
 MonoBehaviour:
   m_ObjectHideFlags: 0

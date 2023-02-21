@@ -19,3 +19,9 @@ MonoBehaviour:
   - statId: MoveSpeed
     nameToShow: Move Speed
     value: 1
+  - statId: Health
+    nameToShow: HP
+    value: -1
+  - statId: HealthRegen
+    nameToShow: HP Regen
+    value: 2
