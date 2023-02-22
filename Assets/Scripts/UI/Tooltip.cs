@@ -14,8 +14,6 @@ public class Tooltip : MonoBehaviour
     [SerializeField] private int characterWrapLimit;
 
     [SerializeField] private RectTransform _rectTransform;
-    
-    //private InputSystemUIInputModule _inputSystemUIInputModule;
 
     private void Awake()
     {

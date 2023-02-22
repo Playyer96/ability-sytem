@@ -6,11 +6,16 @@ using UnityEngine.UI;
 
 public class AbilityButton : TooltipTrigger
 {
-    [SerializeField] private Image _image;
+    private Button _button;
+    public Sprite _sprite;
 
-    private AbilityBase _ability;
+    private void Awake()
+    {
+        _button = GetComponent<Button>();
+    }
 
     private void Start()
     {
+        _button.image.sprite = _sprite;
     }
 }

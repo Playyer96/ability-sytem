@@ -5,8 +5,8 @@ using UnityEngine.EventSystems;
 
 public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] private string content;
-    [SerializeField] private string header;
+    public string header;
+    public string content;
     
     public void OnPointerEnter(PointerEventData eventData)
     {

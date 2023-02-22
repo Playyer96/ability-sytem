@@ -14,16 +14,21 @@ public class TooltipSystem : MonoBehaviour
         tooltipSystem = this;
     }
 
+    private void Start()
+    {
+        Show(false);
+    }
+
     public static void Show(bool value, string content, string header = "")
     {
         if(string.IsNullOrEmpty(header) || string.IsNullOrEmpty(content)) return;
         
         tooltipSystem.tooltip.SetText(content, header);
-        tooltipSystem.tooltip.gameObject.SetActive(value);
+        Show(value);
     }
 
     public static void Show(bool value)
     {
-        tooltipSystem.tooltip.gameObject.SetActive(false);
+        tooltipSystem.tooltip.gameObject.SetActive(value);
     }
 }
