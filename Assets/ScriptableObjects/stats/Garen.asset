@@ -19,9 +19,12 @@ MonoBehaviour:
   - statId: MoveSpeed
     nameToShow: Move Speed
     value: 1
+  - statId: MaxHealth
+    nameToShow: Max Health
+    value: 100
   - statId: Health
     nameToShow: HP
-    value: -1
+    value: 100
   - statId: HealthRegen
     nameToShow: HP Regen
-    value: 2
+    value: 5

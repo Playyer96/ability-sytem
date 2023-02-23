@@ -15,7 +15,7 @@ public class QDeGaren : AbilityBase, IActivable, ITickeable
     public float CurrentTime { get; private set; }
     public float Duration => _duration;
 
-    public override void Setup(StatsScriptableObject stats)
+    public override void Setup(Stats stats)
     {
         Stat attackStat = stats.GetStatByID("Attack");
         if (string.IsNullOrEmpty(attackStat.statId))

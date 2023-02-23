@@ -14,7 +14,7 @@ public class PDeGaren : AbilityBase, ITickeable
 
     public float TimeToActive { get; private set; }
 
-    public override void Setup(StatsScriptableObject stats)
+    public override void Setup(Stats stats)
     {
         Stat stat = stats.GetStatByID("HealthRegen");
         if (string.IsNullOrEmpty(stat.statId))
@@ -48,11 +48,6 @@ public class PDeGaren : AbilityBase, ITickeable
         Stat stat = new Stat();
         if (FindStat("Health", ref stat))
         {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                stat.value -= 1;
-            }
-            
             if (stat.value < healthValue)
             {
                 CurrentTime = 0;

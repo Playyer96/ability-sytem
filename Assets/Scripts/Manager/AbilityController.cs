@@ -42,7 +42,7 @@ public class AbilityController : MonoBehaviour
         }
     }
 
-    public void Setup(StatsScriptableObject stats)
+    public void Setup(Stats stats)
     {
         foreach (var ability in _abilities)
         {

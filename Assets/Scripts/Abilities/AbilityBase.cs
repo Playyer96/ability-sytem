@@ -18,7 +18,7 @@ public abstract class AbilityBase : MonoBehaviour
     
     public bool IsActive { get; protected set; }
 
-    public abstract void Setup(StatsScriptableObject stats);
+    public abstract void Setup(Stats stats);
 
     /// <summary>
     /// Here you need to write your ability code

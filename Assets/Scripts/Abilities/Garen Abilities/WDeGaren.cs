@@ -7,7 +7,7 @@ public class WDeGaren : AbilityBase, IActivable
 
     public InputActionReference AbilityInput => _abilityInput;
 
-    public override void Setup(StatsScriptableObject stats)
+    public override void Setup(Stats stats)
     {
         
     }
