@@ -10,6 +10,8 @@ public class AbilityController : MonoBehaviour
     [SerializeField] private List<AbilityBase> _abilities;
     [SerializeField] private PlayerInput playerInput;
 
+    private List<ITickeable> _tickeables = new();
+
     public void ToggleAbilities(bool toggle)
     {
         foreach (var ability in _abilities)
@@ -35,23 +37,18 @@ public class AbilityController : MonoBehaviour
         {
             if (ability) 
             {
-                ability.UseAbility();
+                ability.Ability();
             }
         }
     }
-    
-    private void Start()
-    {
-        Setup();
-    }
 
-    private void Setup()
+    public void Setup(Stats stats)
     {
         foreach (var ability in _abilities)
         {
-            foreach (var actionEvent in playerInput.actionEvents)
+            if (ability is IActivable activable)
             {
-                if (ability is IActivable activable)
+                foreach (var actionEvent in playerInput.actionEvents)
                 {
                     if (activable.AbilityInput.action.id.ToString() == actionEvent.actionId)
                     {
@@ -62,11 +59,32 @@ public class AbilityController : MonoBehaviour
                             });
                     }
                 }
-                else
-                {
-                    // Here we need to trigger the passive, BUT how do we do that without any context?
-                }
             }
+
+            if (ability is ITickeable tickeable)
+            {
+                tickeable.OnActiveTick += AddToTickables;
+                tickeable.OnDisableTick += RemoveFromTickables;
+            }
+            ability.Setup(stats);
+        }
+    }
+
+    private void AddToTickables(ITickeable tickeable)
+    {
+        _tickeables.Add(tickeable);
+    }
+
+    private void RemoveFromTickables(ITickeable tickeable)
+    {
+        _tickeables.Remove(tickeable);
+    }
+
+    private void Update()
+    {
+        for(int i = _tickeables.Count - 1; i >= 0; i--)
+        {
+            _tickeables[i].Tick(Time.deltaTime);
         }
     }
 
