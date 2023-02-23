@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,6 +12,10 @@ public class Tooltip : MonoBehaviour
 
     [SerializeField] private RectTransform _rectTransform;
 
+    private Vector2 position;
+    private float pivotX;
+    private float pivotY;
+
     private void Awake()
     {
         _rectTransform = GetComponent<RectTransform>();
@@ -28,10 +29,10 @@ public class Tooltip : MonoBehaviour
             SetLenght();
         }
 
-        Vector2 position = Input.mousePosition;
+        position = Input.mousePosition;
 
-        float pivotX = position.x / Screen.width;
-        float pivotY = position.y / Screen.height;
+        pivotX = position.x / Screen.width;
+        pivotY = position.y / Screen.height;
 
         _rectTransform.pivot = new Vector2(pivotX, pivotY);
         transform.position = position;
@@ -52,7 +53,7 @@ public class Tooltip : MonoBehaviour
         _contentField.text = content;
         SetLenght();
     }
-    
+
     public void SetLenght()
     {
         int headerLenght = _headerField.text.Length;
