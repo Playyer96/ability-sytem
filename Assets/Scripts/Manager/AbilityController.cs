@@ -8,6 +8,9 @@ using UnityEngine.InputSystem;
 public class AbilityController : MonoBehaviour
 {
     [SerializeField] private List<AbilityBase> _abilities;
+
+    public List<AbilityBase> Abilities => _abilities;
+
     [SerializeField] private PlayerInput playerInput;
 
     private List<ITickeable> _tickeables = new();
