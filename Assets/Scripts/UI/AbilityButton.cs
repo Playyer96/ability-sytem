@@ -7,7 +7,9 @@ using UnityEngine.UI;
 public class AbilityButton : TooltipTrigger
 {
     private Button _button;
-    public Sprite _sprite;
+    [SerializeField]
+    private Sprite _sprite;
+    public Sprite Sprite { get; set; }
 
     private void Awake()
     {

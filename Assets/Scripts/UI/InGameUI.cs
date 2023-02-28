@@ -44,11 +44,11 @@ public class InGameUI : Singleton<InGameUI>
                 Debug.LogError("Please set an icon sprite to be shown for " + _abilityController.Abilities[i].AbilityName);
                 
                 // Set a default sprite for the button
-                _abilityButtons[i]._sprite = defaultSprite;
+                _abilityButtons[i].Sprite = defaultSprite;
             }
             else
             {
-                _abilityButtons[i]._sprite = _abilityController.Abilities[i].Icon;
+                _abilityButtons[i].Sprite = _abilityController.Abilities[i].Icon;
             }
         }
     }
