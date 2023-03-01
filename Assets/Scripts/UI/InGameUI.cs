@@ -39,8 +39,8 @@ public class InGameUI : Singleton<InGameUI>
                 _abilityButtons.Add(button);
 
                 // Set the button header, content, and icon
-                button.name = ability.AbilityName;
-                button.description = ability.Description;
+                button._name = ability.AbilityName;
+                button._description = ability.Description;
                 // button.SetIcon(ability.Icon ?? _defaultSprite);
                 button.SetIcon(ability.Icon);
             }

@@ -3,12 +3,12 @@ using UnityEngine.EventSystems;
 
 public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public string name;
-    public string description;
+    public string _name;
+    public string _description;
     
     public void OnPointerEnter(PointerEventData eventData)
     {
-        TooltipSystem.Show(true, name, description);
+        TooltipSystem.Show(true, _name, _description);
     }
 
     public void OnPointerExit(PointerEventData eventData)
