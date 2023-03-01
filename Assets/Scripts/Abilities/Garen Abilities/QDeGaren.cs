@@ -15,7 +15,7 @@ public class QDeGaren : AbilityBase, IActivable, ITickeable, ICooldownable
     
     public float CurrentTime { get; private set; }
     public float Duration => _duration;
-    public Guid CooldownId => _abilityInput.action.id;
+    public Guid CooldownId => _abilityInput.action.id;  // This need to be fixed
     public float CooldownDuration => _cooldownDuration;
 
     public override void Setup(Stats stats)
