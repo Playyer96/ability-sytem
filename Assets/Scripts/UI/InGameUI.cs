@@ -1,77 +1,48 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class InGameUI : Singleton<InGameUI>
 {
     [SerializeField] private AbilityController _abilityController;
-    [SerializeField] private List<AbilityButton> _abilityButtons;
-    [SerializeField] private Sprite defaultSprite;
+    [SerializeField] private AbilityButton _abilityButtonPrefab;
+    [SerializeField] private Transform _abilityButtonParent;
+    [SerializeField] private Sprite _defaultSprite;
+
+    private List<AbilityButton> _abilityButtons = new List<AbilityButton>();
 
     private void Start()
     {
-     Init();   
-    }
+        _abilityController = FindObjectOfType<AbilityController>();
 
-    private void Init()
-    {
-        // Find all instances of the MyComponentType component and add them to the list
         AbilityButton[] abilityButtons = FindObjectsOfType<AbilityButton>();
 
-        _abilityController = FindObjectOfType<AbilityController>();
-        
-        SortItems(abilityButtons, _abilityButtons);
-
-        for (var i = 0; i < _abilityButtons.Count; i++)
+        if (abilityButtons.Length > 0)
         {
-            // Check if the current index is out of range for _abilityController.Abilities
-            if (i >= _abilityController.Abilities.Count)
-            {
-                // Do something with the non-null GameObject
-                _abilityButtons[i].gameObject.SetActive(false);
+            _abilityButtons = new List<AbilityButton>(abilityButtons);
 
-                // Skip over the rest of the loop and continue to the next element in the array
-                continue;
-            }
-
-            _abilityButtons[i].header = _abilityController.Abilities[i].AbilityName;
-            _abilityButtons[i].content = _abilityController.Abilities[i].Description;
-
-            // Check if the Icon sprite is null
-            if (_abilityController.Abilities[i].Icon == null)
+            // Remove any existing ability buttons
+            foreach (AbilityButton button in _abilityButtons)
             {
-                Debug.LogError("Please set an icon sprite to be shown for " + _abilityController.Abilities[i].AbilityName);
-                
-                // Set a default sprite for the button
-                _abilityButtons[i]._sprite = defaultSprite;
-            }
-            else
-            {
-                _abilityButtons[i]._sprite = _abilityController.Abilities[i].Icon;
+                Destroy(button.gameObject);
             }
         }
-    }
 
-    private void SortItems(AbilityButton[] objs, List<AbilityButton> objsList)
-    {
-        Array.Sort(objs, (a, b) => string.Compare(a.name, b.name));
+        _abilityButtons.Clear();
 
-        // Add the game objects to the list in alphabetical order
-        foreach (AbilityButton obj in objs)
+        // Create a button for each ability in the Abilities list
+        foreach (AbilityBase ability in _abilityController.Abilities)
         {
-            // Find the index where the object should be inserted based on its name
-            int index = objsList.FindIndex(item => string.Compare(item.name, obj.name) > 0);
+            if (ability is IActivable)
+            {
+                // Create a new ability button from the prefab and add it to the parent transform
+                AbilityButton button = Instantiate(_abilityButtonPrefab, _abilityButtonParent);
+                _abilityButtons.Add(button);
 
-            // If the object should be inserted at the end of the list, add it with the Add method
-            if (index == -1)
-            {
-                objsList.Add(obj);
-            }
-            // Otherwise, insert the object at the appropriate index
-            else
-            {
-                objsList.Insert(index, obj);
+                // Set the button header, content, and icon
+                button.header = ability.AbilityName;
+                button.content = ability.Description;
+                // button.SetIcon(ability.Icon ?? _defaultSprite);
+                button.SetIcon(ability.Icon);
             }
         }
     }

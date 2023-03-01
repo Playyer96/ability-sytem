@@ -8,9 +8,9 @@ using UnityEngine.UI;
 public class SkillsUI : MonoBehaviour
 {
  [SerializeField] private AbilityController _abilityController;
- 
- [Header("Skill Attributes")]
- [SerializeField] private TextMeshProUGUI characterName;
+
+ [Header("Skill Attributes")] [SerializeField]
+ private TextMeshProUGUI characterName;
 
  [SerializeField] private List<SkillsAttributes> _skillsAttributesList;
  [SerializeField] private Sprite defaultSprite;
@@ -22,9 +22,10 @@ public class SkillsUI : MonoBehaviour
    _abilityController = FindObjectOfType<AbilityController>();
 
   characterName.text = _abilityController.gameObject.name;
-  
+
   for (var i = 0; i < _skillsAttributesList.Count; i++)
   {
+
    // Check if the current index is out of range for _abilityController.Abilities
    if (i >= _abilityController.Abilities.Count)
    {
@@ -42,7 +43,7 @@ public class SkillsUI : MonoBehaviour
    if (_abilityController.Abilities[i].Icon == null)
    {
     Debug.LogError("Please set an icon sprite to be shown for " + _abilityController.Abilities[i].AbilityName);
-                
+
     // Set a default sprite for the button
     _skillsAttributesList[i].icon.sprite = defaultSprite;
    }
