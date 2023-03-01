@@ -19,14 +19,14 @@ public class TooltipSystem : Singleton<TooltipSystem>
         
     }
 
-    public static void Show(bool enable, string header = "", string content = "")
+    public static void Show(bool enable, string name = "", string description = "")
     {
-        if (string.IsNullOrEmpty(header) || string.IsNullOrEmpty(content))
+        if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(description))
         {
             return;
         }
         
-        Instance.tooltip.SetText(content, header);
+        Instance.tooltip.SetText(name, description);
         Show(enable);
     }
 
