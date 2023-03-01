@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -11,11 +12,10 @@ public abstract class AbilityBase : MonoBehaviour
 
     protected List<Stat> impactedStats = new();
 
-    public string AbilityName { get => _abilityName; }
-    public string Description { get => _description;  }
-    public Sprite Icon { get => _icon;  }
-    public bool IsEnable { get => _isEnable;  }
-    
+    public string AbilityName => _abilityName; 
+    public string Description  => _description;  
+    public Sprite Icon  => _icon;  
+    public bool IsEnable  => _isEnable;  
     public bool IsActive { get; protected set; }
 
     public abstract void Setup(Stats stats);

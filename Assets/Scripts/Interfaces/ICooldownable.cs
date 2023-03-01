@@ -1,5 +1,7 @@
+using System;
+
 public interface ICooldownable
 {
-    int Id { get; }
+    Guid CooldownId { get; }
     float CooldownDuration { get; }
 }

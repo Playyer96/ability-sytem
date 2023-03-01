@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,12 +6,12 @@ public class CooldownManager : Singleton<CooldownManager>
 {
     public class CooldownData
     {
-        public int Id { get; }
+        public Guid Id { get; }
         public float RemainingTime { get; private set; }
 
         public CooldownData(ICooldownable cooldown)
         {
-            Id = cooldown.Id;
+            Id = cooldown.CooldownId;
             RemainingTime = cooldown.CooldownDuration;
         }
 
@@ -29,7 +30,7 @@ public class CooldownManager : Singleton<CooldownManager>
         _cooldowns.Add(new CooldownData(cooldown));
     }
     
-    public bool IsOnCooldown(int id)
+    public bool IsOnCooldown(Guid id)
     {
         foreach (var cooldown in _cooldowns)
         {
@@ -42,7 +43,7 @@ public class CooldownManager : Singleton<CooldownManager>
         return false;
     }
     
-    public float GetRemainingDuration(int id)
+    public float GetRemainingDuration(Guid id)
     {
         foreach (var cooldown in _cooldowns)
         {

@@ -38,9 +38,15 @@ public class AbilityController : MonoBehaviour
     {
         if (context.started) 
         {
-            if (ability) 
+            if (ability && ability is ICooldownable cooldownable) 
             {
-                ability.Ability();
+                if (!CooldownManager.Instance.IsOnCooldown(cooldownable.CooldownId))
+                {
+                    ability.Ability();
+                    return;
+                }
+                
+                Debug.LogError("Ability is on cooldown");
             }
         }
     }
