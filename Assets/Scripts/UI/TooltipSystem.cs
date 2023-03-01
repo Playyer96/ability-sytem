@@ -21,7 +21,10 @@ public class TooltipSystem : Singleton<TooltipSystem>
 
     public static void Show(bool enable, string header = "", string content = "")
     {
-        if(string.IsNullOrEmpty(header) || string.IsNullOrEmpty(content)) return;
+        if (string.IsNullOrEmpty(header) || string.IsNullOrEmpty(content))
+        {
+            return;
+        }
         
         Instance.tooltip.SetText(content, header);
         Show(enable);

@@ -13,6 +13,7 @@ public class Tooltip : MonoBehaviour
     [SerializeField] private RectTransform _rectTransform;
 
     private Vector2 position;
+    private Vector2 pivotPosition;
     private float pivotX;
     private float pivotY;
 
@@ -34,7 +35,10 @@ public class Tooltip : MonoBehaviour
         pivotX = position.x / Screen.width;
         pivotY = position.y / Screen.height;
 
-        _rectTransform.pivot = new Vector2(pivotX, pivotY);
+        pivotPosition.x = pivotX;
+        pivotPosition.y = pivotY;
+
+        _rectTransform.pivot = pivotPosition;
         transform.position = position;
     }
 
