@@ -28,3 +28,9 @@ MonoBehaviour:
   - statId: HealthRegen
     nameToShow: HP Regen
     value: 5
+  - statId: Mana
+    nameToShow: Mana
+    value: 100
+  - statId: MaxMana
+    nameToShow: Max Mana
+    value: 100
