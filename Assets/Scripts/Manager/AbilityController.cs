@@ -36,18 +36,15 @@ public class AbilityController : MonoBehaviour
 
     public void UseAbility(InputAction.CallbackContext context, AbilityBase ability)
     {
-        if (context.started) 
+        if (ability && ability is ICooldownable cooldownable) 
         {
-            if (ability && ability is ICooldownable cooldownable) 
+            if (!CooldownManager.Instance.IsOnCooldown(cooldownable.CooldownId))
             {
-                if (!CooldownManager.Instance.IsOnCooldown(cooldownable.CooldownId))
-                {
-                    ability.Ability();
-                    return;
-                }
-                
-                Debug.LogError("Ability is on cooldown");
+                ability.Ability();
+                return;
             }
+            
+            Debug.LogError("Ability is on cooldown");
         }
     }
 
@@ -57,23 +54,31 @@ public class AbilityController : MonoBehaviour
         {
             if (ability is IActivable activable)
             {
-                foreach (var actionEvent in playerInput.actionEvents)
+                InputAction action = playerInput.actions.FindAction(activable.ActionName);
+
+                if (action == null)
                 {
-                    if (activable.AbilityInput.action.id.ToString() == actionEvent.actionId)
-                    {
-                        actionEvent.AddListener(
-                            delegate(InputAction.CallbackContext context)
-                            {
-                                UseAbility(context,ability);
-                            });
-                    }
+                    Debug.LogError("Could not find the Ability with name: " + ability.AbilityName);
+                    continue;
                 }
+
+                ability.AbilityId = action.id;
+                
+                action.started += delegate(InputAction.CallbackContext context)
+                {
+                    UseAbility(context,ability);
+                };
             }
 
             if (ability is ITickeable tickeable)
             {
                 tickeable.OnActiveTick += AddToTickables;
                 tickeable.OnDisableTick += RemoveFromTickables;
+            }
+
+            if (ability.AbilityId == null)
+            {
+                ability.AbilityId = new Guid();
             }
             ability.Setup(stats);
         }
@@ -115,7 +120,7 @@ public class AbilityController : MonoBehaviour
                     return;
                 }
                 
-                if (_abilities[j] is IActivable activable && !activable.AbilityInput)
+                if (_abilities[j] is IActivable activable && string.IsNullOrEmpty(activable.ActionName))
                 {
                     Debug.LogError("You have some ability with null InputAction at index: " + j);
                     return;
@@ -123,7 +128,7 @@ public class AbilityController : MonoBehaviour
     
                 if (_abilities[i] is IActivable activableI && _abilities[j] is IActivable activableJ)
                 {
-                    if (activableI.AbilityInput.action.id == activableJ.AbilityInput.action.id)
+                    if (activableI.ActionName == activableJ.ActionName)
                     {
                         Debug.LogError("You can't assign same input to different abilities. Check InputAction in each ability");
                         return;

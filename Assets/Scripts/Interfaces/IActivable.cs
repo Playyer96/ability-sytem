@@ -2,7 +2,7 @@ using UnityEngine.InputSystem;
 
 public interface IActivable
 {
-    InputActionReference AbilityInput
+    string ActionName
     {
         get;
     }

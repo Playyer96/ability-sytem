@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,12 +10,15 @@ public abstract class AbilityBase : MonoBehaviour
     [SerializeField] private bool _isEnable;
 
     protected List<Stat> impactedStats = new();
+    protected Guid abilityId;
 
     public string AbilityName => _abilityName; 
     public string Description  => _description;  
     public Sprite Icon  => _icon;  
     public bool IsEnable  => _isEnable;  
     public bool IsActive { get; protected set; }
+    
+    public Guid AbilityId { get; set; }
 
     public abstract void Setup(Stats stats);
 

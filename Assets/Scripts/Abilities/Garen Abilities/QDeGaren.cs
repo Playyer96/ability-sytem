@@ -1,21 +1,22 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class QDeGaren : AbilityBase, IActivable, ITickeable, ICooldownable
 {
     public event Action<ITickeable> OnActiveTick;
     public event Action<ITickeable> OnDisableTick;
     
-    [SerializeField] private InputActionReference _abilityInput; 
+    [SerializeField] private string _actionName; 
     [SerializeField] private float _duration;
     [SerializeField] private float _cooldownDuration;
     
-    public InputActionReference AbilityInput => _abilityInput;
+    public string ActionName => _actionName;
     
     public float CurrentTime { get; private set; }
     public float Duration => _duration;
-    public Guid CooldownId => _abilityInput.action.id;  // This need to be fixed
+    public Guid CooldownId => new Guid();  // This need to be fixed
     public float CooldownDuration => _cooldownDuration;
 
     public override void Setup(Stats stats)
@@ -37,7 +38,7 @@ public class QDeGaren : AbilityBase, IActivable, ITickeable, ICooldownable
         {
             IsActive = true;
             OnActiveTick?.Invoke(this);
-            CooldownManager.Instance.PutOnCooldown(this);
+            //CooldownManager.Instance.PutOnCooldown(this);
 
             outStat.value *= 5;
             return;
