@@ -36,9 +36,9 @@ public class AbilityController : MonoBehaviour
 
     public void UseAbility(InputAction.CallbackContext context, AbilityBase ability)
     {
-        if (ability && ability is ICooldownable cooldownable) 
+        if (ability && ability is ICooldownable) 
         {
-            if (!CooldownManager.Instance.IsOnCooldown(cooldownable.CooldownId))
+            if (!CooldownManager.Instance.IsOnCooldown(ability.AbilityId))
             {
                 ability.Ability();
                 return;

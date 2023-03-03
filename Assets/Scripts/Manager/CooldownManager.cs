@@ -9,10 +9,10 @@ public class CooldownManager : Singleton<CooldownManager>
         public Guid Id { get; }
         public float RemainingTime { get; private set; }
 
-        public CooldownData(ICooldownable cooldown)
+        public CooldownData(Guid abilityId, float cooldown)
         {
-            Id = cooldown.CooldownId;
-            RemainingTime = cooldown.CooldownDuration;
+            Id = abilityId;
+            RemainingTime = cooldown;
         }
 
         public bool DecrementCooldown(float deltaTime)
@@ -25,9 +25,9 @@ public class CooldownManager : Singleton<CooldownManager>
     
     private readonly List<CooldownData> _cooldowns = new List<CooldownData>();
     
-    public void PutOnCooldown(ICooldownable cooldown)
+    public void PutOnCooldown(Guid abilityId, float cooldown)
     {
-        _cooldowns.Add(new CooldownData(cooldown));
+        _cooldowns.Add(new CooldownData(abilityId, cooldown));
     }
     
     public bool IsOnCooldown(Guid id)

@@ -11,7 +11,7 @@ public class QDeGaren : AbilityBase, IActivable, ITickeable, ICooldownable
     [SerializeField] private string _actionName; 
     [SerializeField] private float _duration;
     [SerializeField] private float _cooldownDuration;
-    
+
     public string ActionName => _actionName;
     
     public float CurrentTime { get; private set; }
@@ -38,7 +38,7 @@ public class QDeGaren : AbilityBase, IActivable, ITickeable, ICooldownable
         {
             IsActive = true;
             OnActiveTick?.Invoke(this);
-            //CooldownManager.Instance.PutOnCooldown(this);
+            CooldownManager.Instance.PutOnCooldown(abilityId,_cooldownDuration);
 
             outStat.value *= 5;
             return;
