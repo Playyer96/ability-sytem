@@ -4,14 +4,10 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(PlayerInput))]
 public class AbilityController : MonoBehaviour
 {
     [SerializeField] private List<AbilityBase> _abilities;
-
     public List<AbilityBase> Abilities => _abilities;
-
-    [SerializeField] private PlayerInput playerInput;
 
     private List<ITickeable> _tickeables = new();
 
@@ -36,15 +32,18 @@ public class AbilityController : MonoBehaviour
 
     public void UseAbility(InputAction.CallbackContext context, AbilityBase ability)
     {
-        if (ability && ability is ICooldownable) 
+        if (ability) 
         {
-            if (!CooldownManager.Instance.IsOnCooldown(ability.AbilityId))
+            if (ability is ICooldownable)
             {
-                ability.Ability();
-                return;
+                if (CooldownManager.Instance.IsOnCooldown(ability.AbilityId))
+                {
+                    Debug.LogError("Ability is not ready");
+                    return;
+                }
+                
             }
-            
-            Debug.LogError("Ability is on cooldown");
+            ability.Ability();
         }
     }
 
@@ -54,17 +53,17 @@ public class AbilityController : MonoBehaviour
         {
             if (ability is IActivable activable)
             {
-                InputAction action = playerInput.actions.FindAction(activable.ActionName);
-
-                if (action == null)
+                if (activable.AbilityAction == null)
                 {
                     Debug.LogError("Could not find the Ability with name: " + ability.AbilityName);
                     continue;
                 }
-
-                ability.AbilityId = action.id;
                 
-                action.started += delegate(InputAction.CallbackContext context)
+                activable.AbilityAction.Enable();
+                
+                ability.AbilityId = activable.AbilityAction.id;
+
+                activable.AbilityAction.started += delegate(InputAction.CallbackContext context)
                 {
                     UseAbility(context,ability);
                 };
@@ -76,10 +75,11 @@ public class AbilityController : MonoBehaviour
                 tickeable.OnDisableTick += RemoveFromTickables;
             }
 
-            if (ability.AbilityId == null)
+            if (ability.AbilityId == Guid.Empty)
             {
                 ability.AbilityId = new Guid();
             }
+            
             ability.Setup(stats);
         }
     }
@@ -120,7 +120,7 @@ public class AbilityController : MonoBehaviour
                     return;
                 }
                 
-                if (_abilities[j] is IActivable activable && string.IsNullOrEmpty(activable.ActionName))
+                if (_abilities[j] is IActivable activable && activable.AbilityAction == null)
                 {
                     Debug.LogError("You have some ability with null InputAction at index: " + j);
                     return;
@@ -128,10 +128,16 @@ public class AbilityController : MonoBehaviour
     
                 if (_abilities[i] is IActivable activableI && _abilities[j] is IActivable activableJ)
                 {
-                    if (activableI.ActionName == activableJ.ActionName)
+                    foreach (var bindingI in activableI.AbilityAction.bindings)
                     {
-                        Debug.LogError("You can't assign same input to different abilities. Check InputAction in each ability");
-                        return;
+                        foreach (var bindingJ in activableJ.AbilityAction.bindings)
+                        {
+                            if (bindingI == bindingJ)
+                            {
+                                Debug.LogError("You can't assign same input to different abilities. Check InputAction in each ability");
+                                return;
+                            }
+                        }
                     }
                 }
             }

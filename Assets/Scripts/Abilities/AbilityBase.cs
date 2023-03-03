@@ -7,8 +7,8 @@ public abstract class AbilityBase : MonoBehaviour
     [SerializeField] private string _abilityName;
     [SerializeField] private string _description;
     [SerializeField] private Sprite _icon;
-    [SerializeField] private bool _isEnable;
-
+    
+    protected bool _isEnable;
     protected List<Stat> impactedStats = new();
     protected Guid abilityId;
 
@@ -18,7 +18,7 @@ public abstract class AbilityBase : MonoBehaviour
     public bool IsEnable  => _isEnable;  
     public bool IsActive { get; protected set; }
     
-    public Guid AbilityId { get; set; }
+    public Guid AbilityId { get => abilityId; set => abilityId = value; }
 
     public abstract void Setup(Stats stats);
 
