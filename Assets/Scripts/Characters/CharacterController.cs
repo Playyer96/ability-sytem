@@ -4,9 +4,10 @@ using UnityEngine;
 public class CharacterController : MonoBehaviour
 {
     public AbilityController abilityController;
+    
     [SerializeField] private StatsScriptableObject stats;
+    
     private Stats characterStats;
-
     private Stat currentHealth;
     private Stat maxHealth;
     private Stat healthRegen;

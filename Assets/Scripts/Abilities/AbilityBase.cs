@@ -17,7 +17,6 @@ public abstract class AbilityBase : MonoBehaviour
     public Sprite Icon  => _icon;  
     public bool IsEnable  => _isEnable;  
     public bool IsActive { get; protected set; }
-    
     public Guid AbilityId { get => abilityId; set => abilityId = value; }
 
     public abstract void Setup(Stats stats);
