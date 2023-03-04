@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class WDeGaren : AbilityBase, IActivable
 {
-    [SerializeField] private uint _abilityAction;
+    [HideInInspector][SerializeField] private uint _abilityAction;
 
     public uint AbilityActionIndex => _abilityAction;
 
