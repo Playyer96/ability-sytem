@@ -8,11 +8,11 @@ public class QDeGaren : AbilityBase, IActivable, ITickeable, ICooldownable
     public event Action<ITickeable> OnActiveTick;
     public event Action<ITickeable> OnDisableTick;
     
-    [SerializeField] private InputAction _abilityAction; 
+    [SerializeField] private uint _abilityAction; 
     [SerializeField] private float _duration;
     [SerializeField] private float _cooldownDuration;
 
-    public InputAction AbilityAction => _abilityAction;
+    public uint AbilityActionIndex => _abilityAction;
     public float CurrentTime { get; private set; }
     public float Duration => _duration;
     public float CooldownDuration => _cooldownDuration;

@@ -68,7 +68,6 @@ MonoBehaviour:
   _abilityName: Pasiva
   _description: Pasiva
   _icon: {fileID: 0}
-  _isEnable: 0
   _timeToActive: 3
 --- !u!114 &6397542794849905115
 MonoBehaviour:
@@ -85,24 +84,7 @@ MonoBehaviour:
   _abilityName: FirstAbility
   _description: Q de garen que gira
   _icon: {fileID: 21300000, guid: 56e456ab0f7f79a4dbabcc9079c49a94, type: 3}
-  _isEnable: 1
-  _abilityAction:
-    m_Name: Ability
-    m_Type: 1
-    m_ExpectedControlType: Button
-    m_Id: da2dad15-feb5-4123-a328-5b0acaf57516
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: d6153c99-a0cf-49df-b5cf-bd9223b95c38
-      m_Path: <Keyboard>/q
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Ability
-      m_Flags: 0
-    m_Flags: 0
+  _abilityAction: 0
   _duration: 2
   _cooldownDuration: 5
 --- !u!114 &2079431412
@@ -120,24 +102,7 @@ MonoBehaviour:
   _abilityName: W de Gren
   _description: W de garen que da escudo
   _icon: {fileID: 21300000, guid: e92527f6d0fe45342ab542b47346d45f, type: 3}
-  _isEnable: 1
-  _abilityAction:
-    m_Name: Ability
-    m_Type: 1
-    m_ExpectedControlType: Button
-    m_Id: cf73b57b-a41b-471c-843d-e9fac8da7403
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 387406f2-ff0a-488a-8ce2-af7d41565764
-      m_Path: <Keyboard>/w
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Ability
-      m_Flags: 0
-    m_Flags: 0
+  _abilityAction: 1
 --- !u!114 &312013284
 MonoBehaviour:
   m_ObjectHideFlags: 0

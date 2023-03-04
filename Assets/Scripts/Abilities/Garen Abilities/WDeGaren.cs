@@ -3,9 +3,9 @@ using UnityEngine.InputSystem;
 
 public class WDeGaren : AbilityBase, IActivable
 {
-    [SerializeField] private InputAction _abilityAction;
+    [SerializeField] private uint _abilityAction;
 
-    public InputAction AbilityAction => _abilityAction;
+    public uint AbilityActionIndex => _abilityAction;
 
     public override void Setup(Stats stats)
     {
