@@ -126,5 +126,16 @@ public class AbilityController : MonoBehaviour
             }
         }
     }
+
+    public void CheckCosts()
+    {
+        foreach (var ability in _abilities)
+        {
+            if (ability is ICostable costable)
+            {
+             costable.CheckhaveCurrency();
+            }
+        }
+    }
 }
 
