@@ -9,7 +9,7 @@ public class QDeGaren : AbilityBase, IActivable, ITickeable, ICooldownable
     [SerializeField] private float _duration;
     [SerializeField] private float _cooldownDuration;
     
-    [HideInInspector][SerializeField] private uint _abilityAction; 
+    [HideInInspector] public uint _abilityAction; 
 
     public uint AbilityActionIndex => _abilityAction;
     public float CurrentTime { get; private set; }
