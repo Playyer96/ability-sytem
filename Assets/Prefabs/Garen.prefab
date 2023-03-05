@@ -84,9 +84,9 @@ MonoBehaviour:
   _abilityName: FirstAbility
   _description: Q de garen que gira
   _icon: {fileID: 21300000, guid: 56e456ab0f7f79a4dbabcc9079c49a94, type: 3}
-  _abilityAction: 0
   _duration: 2
   _cooldownDuration: 5
+  _abilityAction: 0
 --- !u!114 &2079431412
 MonoBehaviour:
   m_ObjectHideFlags: 0

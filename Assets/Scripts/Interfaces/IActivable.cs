@@ -2,7 +2,7 @@ using UnityEngine.InputSystem;
 
 public interface IActivable
 {
-    uint AbilityActionIndex
+    int AbilityActionIndex
     {
         get;
     }

@@ -1,20 +1,32 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class WDeGaren : AbilityBase, IActivable
 {
-    [HideInInspector][SerializeField] private uint _abilityAction;
+    [HideInInspector][SerializeField] private int _abilityAction;
 
-    public uint AbilityActionIndex => _abilityAction;
+    public int AbilityActionIndex => _abilityAction;
 
-    public override void Setup(Stats stats)
+    public override void Setup(Stats stats, Guid id)
     {
-        
+        base.Setup(stats,id);
     }
 
-    public override void Ability()
+    public override void Ability(InputAction.CallbackContext context)
     {
-        Debug.LogError("Trigger W de garen");
+        if (context.started)
+        {
+            Debug.LogError("Trigger W de garen started");
+        }
 
+        if (context.performed)
+        {
+            Debug.LogError("Trigger W de garen performed");
+        }
+        if (context.canceled)
+        {
+            Debug.LogError("Trigger W de garen canceled");
+        }
     }
 }

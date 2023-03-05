@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public abstract class AbilityBase : MonoBehaviour
 {
@@ -17,14 +18,17 @@ public abstract class AbilityBase : MonoBehaviour
     public Sprite Icon  => _icon;  
     public bool IsEnable  => _isEnable;  
     public bool IsActive { get; protected set; }
-    public Guid AbilityId { get => abilityId; set => abilityId = value; }
+    public Guid AbilityId { get => abilityId; }
 
-    public abstract void Setup(Stats stats);
+    public virtual void Setup(Stats stats, Guid id)
+    {
+        abilityId = id;
+    }
 
     /// <summary>
     /// Here you need to write your ability code
     /// </summary>
-    public abstract void Ability();
+    public abstract void Ability(InputAction.CallbackContext context);
 
     protected virtual bool FindStat(string id, ref Stat outStat)
     {

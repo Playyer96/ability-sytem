@@ -33,27 +33,12 @@ public class AbilityController : MonoBehaviour, InputMaster.IAbilitySystemAction
         }
     }
 
-    public void UseAbility(AbilityBase ability)
-    {
-        if (ability) 
-        {
-            if (ability is ICooldownable)
-            {
-                if (CooldownManager.Instance.IsOnCooldown(ability.AbilityId))
-                {
-                    Debug.LogError("Ability is not ready");
-                    return;
-                }
-                
-            }
-            ability.Ability();
-        }
-    }
-
     public void Setup(Stats stats)
     {
         foreach (var ability in _abilities)
         {
+            Guid abilityId = Guid.Empty;
+            
             if (ability is IActivable activable)
             {
                 if (activable.AbilityActionIndex >= AbilityActions.Count)
@@ -62,11 +47,7 @@ public class AbilityController : MonoBehaviour, InputMaster.IAbilitySystemAction
                     continue;
                 }
 
-                var action = AbilityActions[(int)activable.AbilityActionIndex];
-                
-                ability.AbilityId = action.id;
-                
-                action.started += delegate { UseAbility(ability); };
+                abilityId = AbilityActions[activable.AbilityActionIndex].id;
             }
 
             if (ability is ITickeable tickeable)
@@ -75,12 +56,12 @@ public class AbilityController : MonoBehaviour, InputMaster.IAbilitySystemAction
                 tickeable.OnDisableTick += RemoveFromTickables;
             }
 
-            if (ability.AbilityId == Guid.Empty)
+            if (abilityId == Guid.Empty)
             {
-                ability.AbilityId = new Guid();
+                abilityId = new Guid();
             }
             
-            ability.Setup(stats);
+            ability.Setup(stats, abilityId);
         }
     }
 
@@ -89,7 +70,15 @@ public class AbilityController : MonoBehaviour, InputMaster.IAbilitySystemAction
         _inputMaster = new InputMaster();
         _inputMaster.AbilitySystem.Enable();
         
-        //_inputMaster.AbilitySystem.SetCallbacks(this);
+        _inputMaster.AbilitySystem.SetCallbacks(this);
+    }
+    
+    private void Update()
+    {
+        for(int i = _tickeables.Count - 1; i >= 0; i--)
+        {
+            _tickeables[i].Tick(Time.deltaTime);
+        }
     }
 
     private void AddToTickables(ITickeable tickeable)
@@ -101,13 +90,23 @@ public class AbilityController : MonoBehaviour, InputMaster.IAbilitySystemAction
     {
         _tickeables.Remove(tickeable);
     }
-
-    private void Update()
+    
+    private AbilityBase FindAbilityById(Guid actionId)
     {
-        for(int i = _tickeables.Count - 1; i >= 0; i--)
+        foreach (var ability in _abilities)
         {
-            _tickeables[i].Tick(Time.deltaTime);
+            if (ability.AbilityId == actionId)
+            {
+                return ability;
+            }
         }
+
+        return null;
+    }
+
+    private static bool IsAbilityInCooldown(AbilityBase ability)
+    {
+        return ability is ICooldownable && CooldownManager.Instance.IsOnCooldown(ability.AbilityId);
     }
 
     private void OnValidate()
@@ -139,27 +138,29 @@ public class AbilityController : MonoBehaviour, InputMaster.IAbilitySystemAction
             }
         }
     }
+    
+    // INTERFACE IMPLEMENTATIONS
 
     public void OnFirstAbility(InputAction.CallbackContext context)
     {
-        var ability = FindAbilityByActionIndex(0);
+        var ability = FindAbilityById(_inputMaster.AbilitySystem.FirstAbility.id);
         if (ability != null)
         {
             if (!IsAbilityInCooldown(ability))
             {
-                ability.Ability();
+                ability.Ability(context);
             }
         }
     }
 
     public void OnSecondAbility(InputAction.CallbackContext context)
     {
-        var ability = FindAbilityByActionIndex(1);
+        var ability = FindAbilityById(_inputMaster.AbilitySystem.FirstAbility.id);
         if (ability != null)
         {
             if (!IsAbilityInCooldown(ability))
             {
-                ability.Ability();
+                ability.Ability(context);
             }
         }
     }
@@ -172,27 +173,6 @@ public class AbilityController : MonoBehaviour, InputMaster.IAbilitySystemAction
     public void OnFourthAbility(InputAction.CallbackContext context)
     {
         throw new NotImplementedException();
-    }
-
-    private AbilityBase FindAbilityByActionIndex(int actionIndex)
-    {
-        foreach (var ability in _abilities)
-        {
-            if (ability is IActivable activable)
-            {
-                if (activable.AbilityActionIndex == actionIndex)
-                {
-                    return ability;
-                }
-            }
-        }
-
-        return null;
-    }
-
-    private static bool IsAbilityInCooldown(AbilityBase ability)
-    {
-        return ability is ICooldownable && CooldownManager.Instance.IsOnCooldown(ability.AbilityId);
     }
 }
 
