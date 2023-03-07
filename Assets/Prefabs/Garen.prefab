@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 6338620627688925396}
   - component: {fileID: 4730419369655396685}
-  - component: {fileID: 8906482052639634322}
   - component: {fileID: 8543674444555878424}
   - component: {fileID: 6397542794849905115}
   - component: {fileID: 2079431412}
   - component: {fileID: 312013284}
+  - component: {fileID: 4487644167847347353}
   m_Layer: 0
   m_Name: Garen
   m_TagString: Untagged
@@ -53,53 +53,6 @@ MonoBehaviour:
   - {fileID: 8543674444555878424}
   - {fileID: 6397542794849905115}
   - {fileID: 2079431412}
-  playerInput: {fileID: 8906482052639634322}
---- !u!114 &8906482052639634322
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 746084242821603100}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: df0a3d101bdcb6d459f1f7748c384f68, type: 3}
-  m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 638116bc-8366-42de-b884-21dd669ab92a
-    m_ActionName: AbilitySystem/FirstAbility[/Keyboard/q]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: c474a5b1-6b79-4f3a-99ef-d70aca250af1
-    m_ActionName: AbilitySystem/SecondAbility[/Keyboard/w]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: c41a1fa3-511b-4d2d-81ec-3fc1dc3ccc83
-    m_ActionName: AbilitySystem/ThirdAbility[/Keyboard/e]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 7ce9a982-859a-4012-94b0-dd7f36cd1de9
-    m_ActionName: AbilitySystem/FourthAbility[/Keyboard/r]
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Keyboard
-  m_DefaultActionMap: AbilitySystem
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!114 &8543674444555878424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,7 +68,6 @@ MonoBehaviour:
   _abilityName: Pasiva
   _description: Pasiva
   _icon: {fileID: 0}
-  _isEnable: 0
   _timeToActive: 3
 --- !u!114 &6397542794849905115
 MonoBehaviour:
@@ -129,12 +81,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67a66aa8fabadcf47a82d0a38b205a68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _abilityName: Q de garen
+  _abilityName: FirstAbility
   _description: Q de garen que gira
   _icon: {fileID: 21300000, guid: 56e456ab0f7f79a4dbabcc9079c49a94, type: 3}
-  _isEnable: 1
-  _abilityInput: {fileID: -1443774147439166373, guid: df0a3d101bdcb6d459f1f7748c384f68, type: 3}
-  _duration: 10
+  _duration: 2
+  _cooldownDuration: 5
+  _abilityAction: 0
 --- !u!114 &2079431412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,8 +102,7 @@ MonoBehaviour:
   _abilityName: W de Gren
   _description: W de garen que da escudo
   _icon: {fileID: 21300000, guid: e92527f6d0fe45342ab542b47346d45f, type: 3}
-  _isEnable: 1
-  _abilityInput: {fileID: 8034861231224735860, guid: df0a3d101bdcb6d459f1f7748c384f68, type: 3}
+  _abilityAction: 1
 --- !u!114 &312013284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,3 +117,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityController: {fileID: 4730419369655396685}
   stats: {fileID: 11400000, guid: 8f88e3476d1c29a4ead2fae2d596d51e, type: 2}
+--- !u!114 &4487644167847347353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 746084242821603100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fb628776bddce044bffff494da79d03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
