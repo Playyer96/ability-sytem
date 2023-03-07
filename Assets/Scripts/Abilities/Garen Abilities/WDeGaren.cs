@@ -11,9 +11,10 @@ public class WDeGaren : AbilityBase, IActivable, ICostable
     [SerializeField] private float cost;
 
     [SerializeField] private CostType costType;
-
+    
     public float Cost => cost;
     public CostType CostType => costType;
+
     public bool CanUseByCost { get; private set; }
 
     public bool CheckhaveCurrency()

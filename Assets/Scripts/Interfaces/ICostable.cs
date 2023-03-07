@@ -10,9 +10,3 @@ public interface ICostable
     public bool CheckhaveCurrency();
 
 }
-
-[Serializable]
-public enum CostType
-{
-    Mana = 0,
-}
