@@ -103,6 +103,8 @@ MonoBehaviour:
   _description: W de garen que da escudo
   _icon: {fileID: 21300000, guid: e92527f6d0fe45342ab542b47346d45f, type: 3}
   _abilityAction: 1
+  cost: 10
+  costType: 0
 --- !u!114 &312013284
 MonoBehaviour:
   m_ObjectHideFlags: 0

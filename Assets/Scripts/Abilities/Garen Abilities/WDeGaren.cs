@@ -45,18 +45,21 @@ public class WDeGaren : AbilityBase, IActivable, ICostable
 
     public override void Ability(InputAction.CallbackContext context)
     {
-        if (!CanUseByCost)
+        if (context.started)
         {
-            return;
-        }
-        
-        Debug.LogError("Trigger W de garen");
-
-        for (int i = 0; i < impactedStats.Count; i++)
-        {
-            if (impactedStats[i].statId == costType.ToString())
+            if (!CanUseByCost)
             {
-                impactedStats[i].value -= cost;
+                return;
+            }
+
+            Debug.LogError("Trigger W de garen");
+
+            for (int i = 0; i < impactedStats.Count; i++)
+            {
+                if (impactedStats[i].statId == costType.ToString())
+                {
+                    impactedStats[i].value -= cost;
+                }
             }
         }
     }
