@@ -309,8 +309,28 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2079431412, guid: 8332dc5fc8d1d0a4ea934aec6d13f8f3, type: 3}
-      propertyPath: cost
-      value: 10
+      propertyPath: _abilityAction.m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2079431412, guid: 8332dc5fc8d1d0a4ea934aec6d13f8f3, type: 3}
+      propertyPath: _abilityAction.m_ExpectedControlType
+      value: Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 2079431412, guid: 8332dc5fc8d1d0a4ea934aec6d13f8f3, type: 3}
+      propertyPath: _abilityAction.m_SingletonActionBindings.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2079431412, guid: 8332dc5fc8d1d0a4ea934aec6d13f8f3, type: 3}
+      propertyPath: _abilityAction.m_SingletonActionBindings.Array.data[0].m_Id
+      value: 387406f2-ff0a-488a-8ce2-af7d41565764
+      objectReference: {fileID: 0}
+    - target: {fileID: 2079431412, guid: 8332dc5fc8d1d0a4ea934aec6d13f8f3, type: 3}
+      propertyPath: _abilityAction.m_SingletonActionBindings.Array.data[0].m_Path
+      value: <Keyboard>/w
+      objectReference: {fileID: 0}
+    - target: {fileID: 2079431412, guid: 8332dc5fc8d1d0a4ea934aec6d13f8f3, type: 3}
+      propertyPath: _abilityAction.m_SingletonActionBindings.Array.data[0].m_Action
+      value: Ability
       objectReference: {fileID: 0}
     - target: {fileID: 746084242821603100, guid: 8332dc5fc8d1d0a4ea934aec6d13f8f3, type: 3}
       propertyPath: m_Name
@@ -359,6 +379,30 @@ PrefabInstance:
     - target: {fileID: 6338620627688925396, guid: 8332dc5fc8d1d0a4ea934aec6d13f8f3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6397542794849905115, guid: 8332dc5fc8d1d0a4ea934aec6d13f8f3, type: 3}
+      propertyPath: _abilityAction.m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6397542794849905115, guid: 8332dc5fc8d1d0a4ea934aec6d13f8f3, type: 3}
+      propertyPath: _abilityAction.m_ExpectedControlType
+      value: Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 6397542794849905115, guid: 8332dc5fc8d1d0a4ea934aec6d13f8f3, type: 3}
+      propertyPath: _abilityAction.m_SingletonActionBindings.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6397542794849905115, guid: 8332dc5fc8d1d0a4ea934aec6d13f8f3, type: 3}
+      propertyPath: _abilityAction.m_SingletonActionBindings.Array.data[0].m_Id
+      value: d6153c99-a0cf-49df-b5cf-bd9223b95c38
+      objectReference: {fileID: 0}
+    - target: {fileID: 6397542794849905115, guid: 8332dc5fc8d1d0a4ea934aec6d13f8f3, type: 3}
+      propertyPath: _abilityAction.m_SingletonActionBindings.Array.data[0].m_Path
+      value: <Keyboard>/q
+      objectReference: {fileID: 0}
+    - target: {fileID: 6397542794849905115, guid: 8332dc5fc8d1d0a4ea934aec6d13f8f3, type: 3}
+      propertyPath: _abilityAction.m_SingletonActionBindings.Array.data[0].m_Action
+      value: Ability
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8332dc5fc8d1d0a4ea934aec6d13f8f3, type: 3}

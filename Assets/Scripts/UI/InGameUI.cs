@@ -11,7 +11,7 @@ public class InGameUI : Singleton<InGameUI>
 
     private void Start()
     {
-     Init();   
+        Init();   
     }
 
     private void Init()

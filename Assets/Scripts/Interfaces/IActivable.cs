@@ -1,8 +1,6 @@
-using UnityEngine.InputSystem;
-
 public interface IActivable
 {
-    InputActionReference AbilityInput
+    int AbilityActionIndex
     {
         get;
     }

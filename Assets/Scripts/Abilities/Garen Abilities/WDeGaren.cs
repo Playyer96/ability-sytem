@@ -1,13 +1,13 @@
-using System.Linq.Expressions;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class WDeGaren : AbilityBase, IActivable, ICostable
 {
-    [SerializeField] private InputActionReference _abilityInput;
+    [HideInInspector][SerializeField] private int _abilityAction;
 
-    public InputActionReference AbilityInput => _abilityInput;
-
+    public int AbilityActionIndex => _abilityAction;
+    
     [SerializeField] private float cost;
 
     [SerializeField] private CostType costType;
@@ -34,8 +34,9 @@ public class WDeGaren : AbilityBase, IActivable, ICostable
         return CanUseByCost;
     }
 
-    public override void Setup(Stats stats)
+    public override void Setup(Stats stats, Guid id)
     {
+        base.Setup(stats,id);
         Stat costStat = stats.GetStatByID(costType.ToString());
         if (string.IsNullOrEmpty(costStat.statId))
         {
@@ -46,7 +47,7 @@ public class WDeGaren : AbilityBase, IActivable, ICostable
         impactedStats.Add(costStat);
     }
 
-    public override void Ability()
+    public override void Ability(InputAction.CallbackContext context)
     {
         if (!CanUseByCost)
         {
