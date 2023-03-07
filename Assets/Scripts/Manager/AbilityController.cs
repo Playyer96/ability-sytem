@@ -44,12 +44,6 @@ public class AbilityController : MonoBehaviour, InputMaster.IAbilitySystemAction
             
             if (ability is IActivable activable)
             {
-                if (activable.AbilityActionIndex >= AbilityActions.Count)
-                {
-                    Debug.LogError("Ability Action Index is greater than the amount of defined abilities");
-                    continue;
-                }
-
                 abilityId = AbilityActions[activable.AbilityActionIndex].id;
             }
 
