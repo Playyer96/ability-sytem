@@ -33,8 +33,11 @@ public class AbilityController : MonoBehaviour, InputMaster.IAbilitySystemAction
         }
     }
 
-    public void Setup(Stats stats)
+    public void Setup(Stats stats, InputMaster inputMaster)
     {
+        _inputMaster = inputMaster;
+        _inputMaster.AbilitySystem.SetCallbacks(this);
+        
         foreach (var ability in _abilities)
         {
             Guid abilityId = Guid.Empty;
@@ -65,14 +68,6 @@ public class AbilityController : MonoBehaviour, InputMaster.IAbilitySystemAction
         }
     }
 
-    private void Awake()
-    {
-        _inputMaster = new InputMaster();
-        _inputMaster.AbilitySystem.Enable();
-        
-        _inputMaster.AbilitySystem.SetCallbacks(this);
-    }
-    
     private void Update()
     {
         for(int i = _tickeables.Count - 1; i >= 0; i--)

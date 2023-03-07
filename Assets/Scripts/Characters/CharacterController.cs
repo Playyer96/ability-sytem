@@ -11,12 +11,15 @@ public class CharacterController : MonoBehaviour
     private Stat currentHealth;
     private Stat maxHealth;
     private Stat healthRegen;
+    private InputMaster _inputMaster;
 
     // Start is called before the first frame update
     void Start()
     {
+        _inputMaster = new InputMaster();
+        _inputMaster.AbilitySystem.Enable();
         characterStats = new Stats(stats);
-        abilityController.Setup(characterStats);
+        abilityController.Setup(characterStats, _inputMaster);
         
         currentHealth = characterStats.GetStatByID("Health");
         maxHealth     = characterStats.GetStatByID("MaxHealth");
