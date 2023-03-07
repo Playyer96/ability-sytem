@@ -10,11 +10,13 @@ public class InputMasterHelper
     {
         InputMaster inputMaster = new InputMaster();
 
-        string[] actionNames = new string[inputMaster.AbilitySystem.Get().actions.Count];
+        var actionMap = inputMaster.AbilitySystem.Get();
+
+        string[] actionNames = new string[actionMap.actions.Count];
 
         for (int i = 0; i < actionNames.Length; i++)
         {
-            actionNames[i] = inputMaster.AbilitySystem.Get().actions[i].name;
+            actionNames[i] = actionMap.actions[i].name;
         }
 
         return actionNames;
