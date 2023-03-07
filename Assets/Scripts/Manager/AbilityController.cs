@@ -127,6 +127,17 @@ public class AbilityController : MonoBehaviour, InputMaster.IAbilitySystemAction
             }
         }
     }
+
+    public void CheckCosts()
+    {
+        foreach (var ability in _abilities)
+        {
+            if (ability is ICostable costable)
+            {
+             costable.CheckHaveCurrency();
+            }
+        }
+    }
     
     // INTERFACE IMPLEMENTATIONS
 
@@ -144,7 +155,7 @@ public class AbilityController : MonoBehaviour, InputMaster.IAbilitySystemAction
 
     public void OnSecondAbility(InputAction.CallbackContext context)
     {
-        var ability = FindAbilityById(_inputMaster.AbilitySystem.FirstAbility.id);
+        var ability = FindAbilityById(_inputMaster.AbilitySystem.SecondAbility.id);
         if (ability != null)
         {
             if (!IsAbilityInCooldown(ability))

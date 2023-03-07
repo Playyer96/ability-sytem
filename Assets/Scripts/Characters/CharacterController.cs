@@ -10,6 +10,9 @@ public class CharacterController : MonoBehaviour
     private Stat currentHealth;
     private Stat maxHealth;
     private Stat healthRegen;
+    private Stat currentMana;
+    private Stat maxMana;
+    private Stat ManaRegen;
     private InputMaster _inputMaster;
 
     // Start is called before the first frame update
@@ -23,6 +26,10 @@ public class CharacterController : MonoBehaviour
         currentHealth = characterStats.GetStatByID("Health");
         maxHealth     = characterStats.GetStatByID("MaxHealth");
         healthRegen   = characterStats.GetStatByID("HealthRegen");
+        
+        currentMana = characterStats.GetStatByID("Mana");
+        maxMana       = characterStats.GetStatByID("MaxMana");
+        ManaRegen     = characterStats.GetStatByID("ManaRegen");
     }
 
     private void Update()
@@ -36,5 +43,12 @@ public class CharacterController : MonoBehaviour
         {
             currentHealth.value += healthRegen.value * Time.deltaTime;
         }
+        
+        //Mana
+        if (currentMana.value < maxMana.value)
+        {
+            currentMana.value += ManaRegen.value * Time.deltaTime;
+        }
+        abilityController.CheckCosts();
     }
 }

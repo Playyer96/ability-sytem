@@ -309,6 +309,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2079431412, guid: 8332dc5fc8d1d0a4ea934aec6d13f8f3, type: 3}
+      propertyPath: cost
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2079431412, guid: 8332dc5fc8d1d0a4ea934aec6d13f8f3, type: 3}
       propertyPath: _abilityAction.m_Type
       value: 1
       objectReference: {fileID: 0}
