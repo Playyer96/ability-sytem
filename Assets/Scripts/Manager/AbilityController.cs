@@ -134,7 +134,7 @@ public class AbilityController : MonoBehaviour, InputMaster.IAbilitySystemAction
         {
             if (ability is ICostable costable)
             {
-             costable.CheckhaveCurrency();
+             costable.CheckHaveCurrency();
             }
         }
     }

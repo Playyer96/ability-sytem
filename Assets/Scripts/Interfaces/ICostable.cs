@@ -7,6 +7,6 @@ public interface ICostable
     
     bool CanUseByCost { get; }
 
-    public bool CheckhaveCurrency();
+    bool CheckHaveCurrency();
 
 }

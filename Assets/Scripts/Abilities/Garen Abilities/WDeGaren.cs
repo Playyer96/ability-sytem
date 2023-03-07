@@ -6,18 +6,14 @@ public class WDeGaren : AbilityBase, IActivable, ICostable
 {
     [HideInInspector][SerializeField] private int _abilityAction;
 
-    public int AbilityActionIndex => _abilityAction;
-    
     [SerializeField] private float cost;
-
     [SerializeField] private CostType costType;
-    
     public float Cost => cost;
     public CostType CostType => costType;
-
+    public int AbilityActionIndex => _abilityAction;
     public bool CanUseByCost { get; private set; }
 
-    public bool CheckhaveCurrency()
+    public bool CheckHaveCurrency()
     {
         CanUseByCost = false;
      
