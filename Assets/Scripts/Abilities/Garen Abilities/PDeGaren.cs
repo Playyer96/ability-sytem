@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PasiveTest : AbilityBase, ITickeable
+public class PDeGaren : AbilityBase, ITickeable
 {
     public event Action<ITickeable> OnActiveTick;
     public event Action<ITickeable> OnDisableTick;
