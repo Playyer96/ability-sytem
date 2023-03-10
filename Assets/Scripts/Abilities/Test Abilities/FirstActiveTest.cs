@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class QDeGaren : AbilityBase, IActivable, ITickeable, ICooldownable
+public class FirstActiveTest : AbilityBase, IActivable, ITickeable, ICooldownable
 {
     public event Action<ITickeable> OnActiveTick;
     public event Action<ITickeable> OnDisableTick;
