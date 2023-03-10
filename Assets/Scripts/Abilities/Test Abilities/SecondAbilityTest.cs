@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class WDeGaren : AbilityBase, IActivable, ICostable
+public class SecondAbilityTest : AbilityBase, IActivable, ICostable
 {
     [HideInInspector][SerializeField] private int _abilityAction;
 
