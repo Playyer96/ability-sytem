@@ -1,7 +1,8 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class PDeGaren : AbilityBase, ITickeable
+public class PassiveTest : AbilityBase, ITickeable
 {
     public event Action<ITickeable> OnActiveTick;
     public event Action<ITickeable> OnDisableTick;
@@ -14,8 +15,9 @@ public class PDeGaren : AbilityBase, ITickeable
 
     public float TimeToActive { get; private set; }
 
-    public override void Setup(Stats stats)
+    public override void Setup(Stats stats, Guid id)
     {
+        base.Setup(stats,id);
         Stat stat = stats.GetStatByID("HealthRegen");
         if (string.IsNullOrEmpty(stat.statId))
         {
@@ -38,7 +40,7 @@ public class PDeGaren : AbilityBase, ITickeable
         OnActiveTick?.Invoke(this);
     }
 
-    public override void Ability()
+    public override void Ability(InputAction.CallbackContext context)
     {
         
     }

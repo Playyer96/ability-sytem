@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 44de585d2bf06c34b929228c4eac6f69, type: 3}
-  m_Name: Garen
+  m_Name: PlayerStats
   m_EditorClassIdentifier: 
   characterStats:
   - statId: Attack
@@ -28,3 +28,12 @@ MonoBehaviour:
   - statId: HealthRegen
     nameToShow: HP Regen
     value: 5
+  - statId: MaxMana
+    nameToShow: Max Mana
+    value: 100
+  - statId: Mana
+    nameToShow: Mana
+    value: 100
+  - statId: ManaRegen
+    nameToShow: Mana Regen
+    value: 1

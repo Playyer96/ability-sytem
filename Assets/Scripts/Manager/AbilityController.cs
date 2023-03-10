@@ -3,17 +3,16 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Utilities;
 
-[RequireComponent(typeof(PlayerInput))]
-public class AbilityController : MonoBehaviour
+public class AbilityController : MonoBehaviour, InputMaster.IAbilitySystemActions
 {
     [SerializeField] private List<AbilityBase> _abilities;
-
     public List<AbilityBase> Abilities => _abilities;
 
-    [SerializeField] private PlayerInput playerInput;
-
     private List<ITickeable> _tickeables = new();
+    private InputMaster _inputMaster;
+    private ReadOnlyArray<InputAction> AbilityActions => _inputMaster.AbilitySystem.Get().actions;
 
     public void ToggleAbilities(bool toggle)
     {
@@ -34,34 +33,18 @@ public class AbilityController : MonoBehaviour
         }
     }
 
-    public void UseAbility(InputAction.CallbackContext context, AbilityBase ability)
+    public void Setup(Stats stats, InputMaster inputMaster)
     {
-        if (context.started) 
-        {
-            if (ability) 
-            {
-                ability.Ability();
-            }
-        }
-    }
-
-    public void Setup(Stats stats)
-    {
+        _inputMaster = inputMaster;
+        _inputMaster.AbilitySystem.SetCallbacks(this);
+        
         foreach (var ability in _abilities)
         {
+            Guid abilityId = Guid.Empty;
+            
             if (ability is IActivable activable)
             {
-                foreach (var actionEvent in playerInput.actionEvents)
-                {
-                    if (activable.AbilityInput.action.id.ToString() == actionEvent.actionId)
-                    {
-                        actionEvent.AddListener(
-                            delegate(InputAction.CallbackContext context)
-                            {
-                                UseAbility(context,ability);
-                            });
-                    }
-                }
+                abilityId = AbilityActions[activable.AbilityActionIndex].id;
             }
 
             if (ability is ITickeable tickeable)
@@ -69,7 +52,21 @@ public class AbilityController : MonoBehaviour
                 tickeable.OnActiveTick += AddToTickables;
                 tickeable.OnDisableTick += RemoveFromTickables;
             }
-            ability.Setup(stats);
+
+            if (abilityId == Guid.Empty)
+            {
+                abilityId = new Guid();
+            }
+            
+            ability.Setup(stats, abilityId);
+        }
+    }
+
+    private void Update()
+    {
+        for(int i = _tickeables.Count - 1; i >= 0; i--)
+        {
+            _tickeables[i].Tick(Time.deltaTime);
         }
     }
 
@@ -82,13 +79,23 @@ public class AbilityController : MonoBehaviour
     {
         _tickeables.Remove(tickeable);
     }
-
-    private void Update()
+    
+    private AbilityBase FindAbilityById(Guid actionId)
     {
-        for(int i = _tickeables.Count - 1; i >= 0; i--)
+        foreach (var ability in _abilities)
         {
-            _tickeables[i].Tick(Time.deltaTime);
+            if (ability.AbilityId == actionId)
+            {
+                return ability;
+            }
         }
+
+        return null;
+    }
+
+    private static bool IsAbilityInCooldown(AbilityBase ability)
+    {
+        return ability is ICooldownable && CooldownManager.Instance.IsOnCooldown(ability.AbilityId);
     }
 
     private void OnValidate()
@@ -108,23 +115,64 @@ public class AbilityController : MonoBehaviour
                     Debug.LogError("You have some ability unassigned at index: " + j);
                     return;
                 }
-                
-                if (_abilities[j] is IActivable activable && !activable.AbilityInput)
-                {
-                    Debug.LogError("You have some ability with null InputAction at index: " + j);
-                    return;
-                }
-    
+
                 if (_abilities[i] is IActivable activableI && _abilities[j] is IActivable activableJ)
                 {
-                    if (activableI.AbilityInput.action.id == activableJ.AbilityInput.action.id)
+                    if (activableI.AbilityActionIndex == activableJ.AbilityActionIndex)
                     {
-                        Debug.LogError("You can't assign same input to different abilities. Check InputAction in each ability");
+                        Debug.LogError("You can't assign same input to different abilities. Check InputActionIndex in each ability");
                         return;
                     }
                 }
             }
         }
+    }
+
+    public void CheckCosts()
+    {
+        foreach (var ability in _abilities)
+        {
+            if (ability is ICostable costable)
+            {
+             costable.CheckHaveCurrency();
+            }
+        }
+    }
+    
+    // INTERFACE IMPLEMENTATIONS
+
+    public void OnFirstAbility(InputAction.CallbackContext context)
+    {
+        var ability = FindAbilityById(_inputMaster.AbilitySystem.FirstAbility.id);
+        if (ability != null)
+        {
+            if (!IsAbilityInCooldown(ability))
+            {
+                ability.Ability(context);
+            }
+        }
+    }
+
+    public void OnSecondAbility(InputAction.CallbackContext context)
+    {
+        var ability = FindAbilityById(_inputMaster.AbilitySystem.SecondAbility.id);
+        if (ability != null)
+        {
+            if (!IsAbilityInCooldown(ability))
+            {
+                ability.Ability(context);
+            }
+        }
+    }
+
+    public void OnThirdAbility(InputAction.CallbackContext context)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void OnFourthAbility(InputAction.CallbackContext context)
+    {
+        throw new NotImplementedException();
     }
 }
 

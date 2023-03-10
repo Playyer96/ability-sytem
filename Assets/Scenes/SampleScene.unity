@@ -301,7 +301,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &4487644167847347351
+--- !u!1001 &1683596913
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -310,7 +310,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 746084242821603100, guid: 8332dc5fc8d1d0a4ea934aec6d13f8f3, type: 3}
       propertyPath: m_Name
-      value: Garen
+      value: PlayerTest
       objectReference: {fileID: 0}
     - target: {fileID: 6338620627688925396, guid: 8332dc5fc8d1d0a4ea934aec6d13f8f3, type: 3}
       propertyPath: m_RootOrder

@@ -1,48 +1,77 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class InGameUI : Singleton<InGameUI>
 {
     [SerializeField] private AbilityController _abilityController;
-    [SerializeField] private AbilityButton _abilityButtonPrefab;
-    [SerializeField] private Transform _abilityButtonParent;
-    [SerializeField] private Sprite _defaultSprite;
+    [SerializeField] private List<AbilityButton> _abilityButtons;
+    [SerializeField] private Sprite defaultSprite;
 
-    private List<AbilityButton> _abilityButtons = new List<AbilityButton>();
-    
     private void Start()
     {
-        _abilityController = FindObjectOfType<AbilityController>();
+        Init();   
+    }
 
+    private void Init()
+    {
+        // Find all instances of the MyComponentType component and add them to the list
         AbilityButton[] abilityButtons = FindObjectsOfType<AbilityButton>();
 
-        if (abilityButtons.Length > 0)
-        {
-            _abilityButtons = new List<AbilityButton>(abilityButtons);
+        _abilityController = FindObjectOfType<AbilityController>();
+        
+        SortItems(abilityButtons, _abilityButtons);
 
-            // Remove any existing ability buttons
-            foreach (AbilityButton button in _abilityButtons)
+        for (var i = 0; i < _abilityButtons.Count; i++)
+        {
+            // Check if the current index is out of range for _abilityController.Abilities
+            if (i >= _abilityController.Abilities.Count)
             {
-                Destroy(button.gameObject);
+                // Do something with the non-null GameObject
+                _abilityButtons[i].gameObject.SetActive(false);
+
+                // Skip over the rest of the loop and continue to the next element in the array
+                continue;
+            }
+
+            _abilityButtons[i].header = _abilityController.Abilities[i].AbilityName;
+            _abilityButtons[i].content = _abilityController.Abilities[i].Description;
+
+            // Check if the Icon sprite is null
+            if (_abilityController.Abilities[i].Icon == null)
+            {
+                Debug.LogError("Please set an icon sprite to be shown for " + _abilityController.Abilities[i].AbilityName);
+                
+                // Set a default sprite for the button
+                _abilityButtons[i].Sprite = defaultSprite;
+            }
+            else
+            {
+                _abilityButtons[i].Sprite = _abilityController.Abilities[i].Icon;
             }
         }
+    }
 
-        _abilityButtons.Clear();
+    private void SortItems(AbilityButton[] objs, List<AbilityButton> objsList)
+    {
+        Array.Sort(objs, (a, b) => string.Compare(a.name, b.name));
 
-        // Create a button for each ability in the Abilities list
-        foreach (AbilityBase ability in _abilityController.Abilities)
+        // Add the game objects to the list in alphabetical order
+        foreach (AbilityButton obj in objs)
         {
-            if (ability is IActivable)
-            {
-                // Create a new ability button from the prefab and add it to the parent transform
-                AbilityButton button = Instantiate(_abilityButtonPrefab, _abilityButtonParent);
-                _abilityButtons.Add(button);
+            // Find the index where the object should be inserted based on its name
+            int index = objsList.FindIndex(item => string.Compare(item.name, obj.name) > 0);
 
-                // Set the button header, content, and icon
-                button._name = ability.AbilityName;
-                button._description = ability.Description;
-                // button.SetIcon(ability.Icon ?? _defaultSprite);
-                button.SetIcon(ability.Icon);
+            // If the object should be inserted at the end of the list, add it with the Add method
+            if (index == -1)
+            {
+                objsList.Add(obj);
+            }
+            // Otherwise, insert the object at the appropriate index
+            else
+            {
+                objsList.Insert(index, obj);
             }
         }
     }
