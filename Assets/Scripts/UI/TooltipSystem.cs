@@ -6,8 +6,10 @@ public class TooltipSystem : Singleton<TooltipSystem>
 
     private void Start()
     {
-        if(!HasInstance())
+        if (!HasInstance())
+        {
             Init();
+        }
 
         if (!tooltip)
         {
@@ -15,12 +17,18 @@ public class TooltipSystem : Singleton<TooltipSystem>
             Show(false);
         }
         else
+        {
             Show(false);
-        
+        }
     }
 
     public static void Show(bool enable, string name = "", string description = "")
     {
+        if (!Instance.tooltip)
+        {
+            Instance.tooltip = FindObjectOfType<Tooltip>();
+        }
+        
         if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(description))
         {
             return;

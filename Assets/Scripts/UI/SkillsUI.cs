@@ -22,20 +22,22 @@ public class SkillsUI : MonoBehaviour
    _abilityController = FindObjectOfType<AbilityController>();
 
   characterName.text = _abilityController.gameObject.name;
-
+  
   for (var i = 0; i < _skillsAttributesList.Count; i++)
   {
-
    // Check if the current index is out of range for _abilityController.Abilities
-   if (i >= _abilityController.Abilities.Count)
+   if (_skillsAttributesList.Count <= _abilityController.Abilities.Count || _abilityController.Abilities is IActivable)
    {
     // Do something with the non-null GameObject
-    _skillsAttributesList[i].panel.SetActive(false);
+    _skillsAttributesList[i].panel.SetActive(true);
 
     // Skip over the rest of the loop and continue to the next element in the array
-    continue;
    }
-
+   else
+   {
+    _skillsAttributesList[i].panel.SetActive(false);
+   }
+   
    _skillsAttributesList[i].name.text = _abilityController.Abilities[i].AbilityName;
    _skillsAttributesList[i].description.text = _abilityController.Abilities[i].Description;
 

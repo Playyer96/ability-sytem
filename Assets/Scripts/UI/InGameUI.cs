@@ -9,7 +9,7 @@ public class InGameUI : Singleton<InGameUI>
     [SerializeField] private Sprite _defaultSprite;
 
     private List<AbilityButton> _abilityButtons = new List<AbilityButton>();
-
+    
     private void Start()
     {
         _abilityController = FindObjectOfType<AbilityController>();
