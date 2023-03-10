@@ -17,13 +17,13 @@ The AbilityController class takes a list of abilities and make the setup for the
 
 ## Ability
 
-![image](https://user-images.githubusercontent.com/20919016/224190018-f41f9cbc-44bd-49c2-b9ce-4c65dfa1bf13.png)
+![image](https://user-images.githubusercontent.com/20919016/224190130-ea4b6359-a88d-4dab-b60a-6f54d245065d.png)
 
 To implement a new Ability is necessary to inherit from AbilityBase class, after that each Ability can implement various interfaces to extend its behavior as IActivable, ICooldownable, ICostable, if the ability is active, you can pick a the desire action in the inspector.
 
 ## Input Master Helper
 
-![image](https://user-images.githubusercontent.com/20919016/224189302-3aeb50b2-7811-435f-a4ae-a3d23ff70e0c.png)
+![image](https://user-images.githubusercontent.com/20919016/224190160-7ae75d3e-be89-48a6-98e3-7530b81d1df2.png)
 
 The InputMasterHelper is an extention that allows the developer assing an action declared in the InputActionAsset to an Ability trought the inspector.
 
