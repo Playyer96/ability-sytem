@@ -17,7 +17,7 @@ The AbilityController class takes a list of abilities and make the setup for the
 
 ## Ability
 
-![image](https://user-images.githubusercontent.com/20919016/224189100-c4facf13-0cbe-4e57-b9e3-959888b5ad00.png)
+![image](https://user-images.githubusercontent.com/20919016/224190018-f41f9cbc-44bd-49c2-b9ce-4c65dfa1bf13.png)
 
 To implement a new Ability is necessary to inherit from AbilityBase class, after that each Ability can implement various interfaces to extend its behavior as IActivable, ICooldownable, ICostable, if the ability is active, you can pick a the desire action in the inspector.
 
