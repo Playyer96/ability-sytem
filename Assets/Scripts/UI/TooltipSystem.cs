@@ -2,31 +2,44 @@ using UnityEngine;
 
 public class TooltipSystem : Singleton<TooltipSystem>
 {
-    public static TooltipSystem tooltipSystem;
-
     [SerializeField] private Tooltip tooltip;
 
     private void Start()
     {
+        if (!HasInstance())
+        {
+            Init();
+        }
+
         if (!tooltip)
+        {
             tooltip = FindObjectOfType<Tooltip>();
-        
-        Show(false);
+            Show(false);
+        }
+        else
+        {
+            Show(false);
+        }
     }
 
-    public static void Show(bool enable, string content, string header = "")
+    public static void Show(bool enable, string name = "", string description = "")
     {
-        if (string.IsNullOrEmpty(header) || string.IsNullOrEmpty(content))
+        if (!Instance.tooltip)
+        {
+            Instance.tooltip = FindObjectOfType<Tooltip>();
+        }
+        
+        if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(description))
         {
             return;
         }
         
-        tooltipSystem.tooltip.SetText(content, header);
+        Instance.tooltip.SetText(name, description);
         Show(enable);
     }
 
     public static void Show(bool enable)
     {
-        tooltipSystem.tooltip.gameObject.SetActive(enable);
+        Instance.tooltip.gameObject.SetActive(enable);
     }
 }

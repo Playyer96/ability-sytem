@@ -1,16 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public string header;
-    public string content;
-    
+    public string _name;
+    public string _description;
+
+    private void OnEnable()
+    {
+        TooltipSystem.Show(true, _name, _description);
+    }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
-        TooltipSystem.Show(true, content, header);
+        if (TooltipSystem.Instance)
+            TooltipSystem.Show(true, _name, _description);
     }
 
     public void OnPointerExit(PointerEventData eventData)

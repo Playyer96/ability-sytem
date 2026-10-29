@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -42,19 +43,19 @@ public class Tooltip : MonoBehaviour
         transform.position = position;
     }
 
-    public void SetText(string content, string header = "")
+    public void SetText(string name, string description = "")
     {
-        if (string.IsNullOrEmpty(header))
+        if (string.IsNullOrEmpty(name))
         {
             _headerField.gameObject.SetActive(false);
         }
         else
         {
             _headerField.gameObject.SetActive(true);
-            _headerField.text = header;
+            _headerField.text = name;
         }
 
-        _contentField.text = content;
+        _contentField.text = description;
         SetLenght();
     }
 
